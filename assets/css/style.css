@@ -1,0 +1,88 @@
+.movieContainer {
+  display: inline;
+}
+
+.movieResult {
+  display: inline;
+  padding: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.movie-title {
+  margin-bottom: 5px;
+}
+
+.guidebox-search-results {
+  position: relative;
+}
+
+.active {
+  position: absolute;
+  left: 300;
+}
+
+.movieOverview {
+  color: white;
+  position: absolute;
+  left: 290px;
+  height: 362px;
+  width: 60%;
+  margin-bottom: 60px;
+  background-color: black;;
+  border-style: solid;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.movieText {
+  display: block;
+  font-weight:lighter;
+  font-size: 12px;
+  text-align: justify;
+  left: 35px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 20px;
+  border-bottom: 3px solid #808080;
+}
+
+.mpaa-rating {
+  padding-top: 5px;
+  padding-bottom: 0px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+.genre {
+  margin: 0;
+  padding-bottom: 15px;
+}
+
+.commonsense, .commonsense:after {
+  color: white;
+  display: inline-block;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.movieLinks a, a:after {
+  color: white;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.watch {
+  display: inline;
+  padding-right: 10px;
+}
+
+.guidebox-search-form {
+  margin-bottom: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
