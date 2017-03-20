@@ -80,7 +80,7 @@ $(document).ready(function() {
       searchGuideboxAPI(query, displaySearchData);
     });
   }
-  //show footer when scrolling to end of page
+
   $(function(){    
     runOnSubmit();
   });
