@@ -1,5 +1,13 @@
 body {
-  background: red;
+  background: black;
+  text-align: center;
+  color: white;
+  background-image: url("../images/movie-app-2.png");
+}
+
+#logo {
+  padding-top: 30px;
+
 }
 
 .movieContainer {
