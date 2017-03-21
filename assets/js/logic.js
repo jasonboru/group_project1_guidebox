@@ -21,6 +21,18 @@ $(document).ready(function() {
       var meta_rating = omdb.Metascore;
     });
   };
+
+  function streamingSources(streamData) {
+      for(i=0; i<streamData.length; i++) {
+        console.log(streamData[i].display_name);
+        $(".streamResults").append("<a target='_blank' href="+streamData[i].display_link
+          +"><span>"+streamData[i].display_name+" </span>");
+      }
+  }
+
+
+
+
   function displaySearchData(data){
   var apisDefaultImg = 'https://static-api.guidebox.com/misc/default_movie_240x342.jpg';
   if (data.results) {
@@ -36,33 +48,43 @@ $(document).ready(function() {
           var genre = data.genres[0].title;
           var movieDescription = data.overview;
           var imdbLink = imdbEndpoint + data.imdb;  
-          console.log("___OMDB link for" + data.title+"___________")
+          console.log("___OMDB link for " + data.title+"___________")
           console.log(omdbEndpoint + data.imdb);
+          console.log("___Guidebox link for " + data.title+"___________")
+          console.log(trailerLinksURL);
           getDataFromOMDB(data.imdb);
+
           var rottenTomatoes = rottenTomEndpoint + data.rottentomatoes; 
           var commonSenseMedia = data.common_sense_media;
           var metaCritic = data.metacritic;
           var trailerVideo = data.trailers.web[0].embed;
+          
           var watchLinks = data.purchase_web_sources[0].link;
           var description =
             "<div class='movieOverview hidden'>" +
               "<h1 class='movie-title'>" + data.title + "</h1>" +
               "<h3 class='mpaa-rating'> Rated: " + rated +
-              "<a class='commonsense' target='_blank' title='Common Sense Media' href=" + commonSenseMedia + " ><i class='fa fa-check-circle-o' aria-hidden='true'></i></a><br>" +"</h3>" +
+              "<a class='commonsense' target='_blank' title='Common Sense Media' href=" 
+                    + commonSenseMedia + " ><i class='fa fa-check-circle-o' aria-hidden='true'></i></a><br>" +"</h3>" +
               "<h5 class='genre'> Genre: " + genre + "</h5>" +
               "<div class='movieLinks'>" +
                 "<a href=" + trailerVideo + " rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe'>"+
                 "<i class='fa fa-youtube-play fa-2x' style='color:red;' aria-hidden='true'></i>" +
                 "</a>" +
-                "<a target='_blank' title='IMDB' href=" + imdbLink + "><img src='https://antjtw.files.wordpress.com/2013/09/imdb.png?w=648' height='25' width='25'></a>" +
-                "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes +"><img src='https://maxcdn.icons8.com/office/PNG/512/Food/rotten_tomatoes-512.png' height='25' width='25'></a>" +
-                "<a target='_blank'  title='Metacritic' href=" + metaCritic +"><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Metacritic.svg/500px-Metacritic.svg.png' height='25' width='25'></a>" +
+                "<a target='_blank' title='IMDB' href=" + imdbLink + "><img src='assets/images/imdb.png' height='25' width='25'></a>" +
+                "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes 
+                    +"><img src='assets/images/rotten.png' height='25' width='25'></a>" +
+                "<a target='_blank'  title='Metacritic' href=" + metaCritic +"><img src='assets/images/Metacritic.png' height='25' width='25'></a>" +
               "</div>" +
               "<span class='movieText'>" + movieDescription + "</span><br>" +
-              "<h5 class='watch'> Rent or Buy </h5>" + "<a target='_blank'  title='Rent/Buy' href=" + watchLinks +"><i class='fa fa-film fa-2x' style='color:white;' aria-hidden='true'></i></a>" + "<br>" + 
+              "<h5 class='watch'> Rent or Buy </h5>" + "<a target='_blank'  title='Rent/Buy' href=" + watchLinks 
+                    +"><i class='fa fa-film fa-2x' style='color:white;' aria-hidden='true'></i></a>" + "<br>"  + 
+              "<div class='streamResults'>" + "</div>"
             "</div>";  
             movieResult = "<div class='movieContainer'><img class='movieResult' src=" + image + ">" + description + "</div>";
           $('.guidebox-search-results').append(movieResult);
+          streamingSources(data.subscription_web_sources);
+          
         });
       }
     });
@@ -78,8 +100,14 @@ $(document).ready(function() {
       event.preventDefault();
       var query = $(this).find('.guidebox-query').val();
       searchGuideboxAPI(query, displaySearchData);
+      $(".landing").hide();
     });
   }
+
+  $(document).on('click','#searchCall', function(){
+    $(".landing").show();
+  });
+
 
   $(function(){    
     runOnSubmit();

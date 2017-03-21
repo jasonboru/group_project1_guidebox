@@ -5,9 +5,27 @@ body {
   background-image: url("../images/movie-app-2.png");
 }
 
+h1 {
+      font-size: 3em;
+}
+
+h2 {
+      font-size: 2em;
+}
+
+h3 {
+      font-size: 1em;
+}
+
 #logo {
   padding-top: 30px;
 
+}
+
+#searchCall {
+  position:fixed;
+  right: 2em;
+  top: 2em;
 }
 
 .movieContainer {
