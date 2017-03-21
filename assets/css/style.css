@@ -4,6 +4,7 @@ body {
   color: white;
   background-image: url("../images/movie_bkg.png");
   background-size: cover;
+  overflow-x:hidden;
 }
 
 h1 {
