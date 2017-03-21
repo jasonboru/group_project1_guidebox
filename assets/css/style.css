@@ -1,5 +1,11 @@
 body {
-  background: blue;
+  background: black;
+  text-align: center;
+  color: white;
+}
+
+nav {
+  background: black;
 }
 
 .movieContainer {
@@ -84,6 +90,7 @@ body {
 
 .guidebox-search-form {
   margin-bottom: 20px;
+  width: 33%;
 }
 
 .hidden {
