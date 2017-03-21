@@ -22,7 +22,7 @@ $(document).ready(function() {
     });
   };
 
-  function streamingSources(streamData) {
+  /*function streamingSources(streamData) {
       for(i=0; i<streamData.length; i++) {
         console.log(streamData[i].display_name);
         $(".streamResults").append("<a target='_blank' href="+streamData[i].display_link
@@ -30,8 +30,12 @@ $(document).ready(function() {
       }
   }
 
-
-
+    function showCast(cast) {
+      for(i=0; i<6; i++) {
+        console.log(cast[i].name);
+        $(".castResults").append("<span>"+cast[i].name+" </span>");
+      }
+  } */
 
   function displaySearchData(data){
   var apisDefaultImg = 'https://static-api.guidebox.com/misc/default_movie_240x342.jpg';
@@ -47,21 +51,25 @@ $(document).ready(function() {
           var rated = data.rating;
           var genre = data.genres[0].title;
           var movieDescription = data.overview;
-          var imdbLink = imdbEndpoint + data.imdb;  
+          var imdbLink = imdbEndpoint + data.imdb;
+
           console.log("___OMDB link for " + data.title+"___________")
           console.log(omdbEndpoint + data.imdb);
           console.log("___Guidebox link for " + data.title+"___________")
           console.log(trailerLinksURL);
+
           getDataFromOMDB(data.imdb);
+
+          //streamingSources(data.subscription_web_sources);
+          //showCast(data.cast);
 
           var rottenTomatoes = rottenTomEndpoint + data.rottentomatoes; 
           var commonSenseMedia = data.common_sense_media;
           var metaCritic = data.metacritic;
-          var trailerVideo = data.trailers.web[0].embed;
-          
+          var trailerVideo = data.trailers.web[0].embed;          
           var watchLinks = data.purchase_web_sources[0].link;
           var description =
-            "<div class='movieOverview hidden'>" +
+            "<div class='movieOverview hidden' id='"+ data.id +"'>" +
               "<h1 class='movie-title'>" + data.title + "</h1>" +
               "<h3 class='mpaa-rating'> Rated: " + rated +
               "<a class='commonsense' target='_blank' title='Common Sense Media' href=" 
@@ -75,15 +83,16 @@ $(document).ready(function() {
                 "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes 
                     +"><img src='assets/images/rotten.png' height='25' width='25'></a>" +
                 "<a target='_blank'  title='Metacritic' href=" + metaCritic +"><img src='assets/images/Metacritic.png' height='25' width='25'></a>" +
-              "</div>" +
+              "</div>" + 
+              "<div class='castResults'></div>" +
               "<span class='movieText'>" + movieDescription + "</span><br>" +
               "<h5 class='watch'> Rent or Buy </h5>" + "<a target='_blank'  title='Rent/Buy' href=" + watchLinks 
                     +"><i class='fa fa-film fa-2x' style='color:white;' aria-hidden='true'></i></a>" + "<br>"  + 
-              "<div class='streamResults'>" + "</div>"
+              "<div class='streamResults'></div>"
             "</div>";  
-            movieResult = "<div class='movieContainer'><img class='movieResult' src=" + image + ">" + description + "</div>";
+            movieResult = "<div class='movieContainer'><img class='movieResult z-depth-5' src=" + image + ">" + description + "</div>";
           $('.guidebox-search-results').append(movieResult);
-          streamingSources(data.subscription_web_sources);
+          
           
         });
       }
