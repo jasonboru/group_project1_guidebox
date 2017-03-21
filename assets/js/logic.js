@@ -26,7 +26,7 @@ $(document).ready(function() {
       for(i=0; i<streamData.length; i++) {
         console.log(streamData[i].display_name);
         $(".streamResults").append("<a target='_blank' href="+streamData[i].display_link
-          +"><span>"+streamData[i].display_name+" </span>");
+          +"><span>"+streamData[i].display_name+" </span></a>");
       }
   }
 
@@ -68,14 +68,15 @@ $(document).ready(function() {
           var metaCritic = data.metacritic;
           var trailerVideo = data.trailers.web[0].embed;          
           var watchLinks = data.purchase_web_sources[0].link;
-          var description =
-            "<div class='movieOverview hidden' id='"+ data.id +"'>" +
-              "<h1 class='movie-title'>" + data.title + "</h1>" +
+
+
+          var descHead = "<h1 class='movie-title'>" + data.title + "</h1>" +
               "<h3 class='mpaa-rating'> Rated: " + rated +
               "<a class='commonsense' target='_blank' title='Common Sense Media' href=" 
                     + commonSenseMedia + " ><i class='fa fa-check-circle-o' aria-hidden='true'></i></a><br>" +"</h3>" +
-              "<h5 class='genre'> Genre: " + genre + "</h5>" +
-              "<div class='movieLinks'>" +
+              "<h5 class='genre'> Genre: " + genre + "</h5>"
+
+          var descLinks = "<div class='movieLinks'>" +
                 "<a href=" + trailerVideo + " rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe'>"+
                 "<i class='fa fa-youtube-play fa-2x' style='color:red;' aria-hidden='true'></i>" +
                 "</a>" +
@@ -83,13 +84,19 @@ $(document).ready(function() {
                 "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes 
                     +"><img src='assets/images/rotten.png' height='25' width='25'></a>" +
                 "<a target='_blank'  title='Metacritic' href=" + metaCritic +"><img src='assets/images/Metacritic.png' height='25' width='25'></a>" +
-              "</div>" + 
-              "<div class='castResults'></div>" +
-              "<span class='movieText'>" + movieDescription + "</span><br>" +
-              "<h5 class='watch'> Rent or Buy </h5>" + "<a target='_blank'  title='Rent/Buy' href=" + watchLinks 
+              "</div>"
+
+          var descbody = "<div class='castResults'></div>" +
+              "<span class='movieText'>" + movieDescription + "</span><br>"
+
+          var descViews = "<h5 class='watch'> Rent or Buy </h5>" + "<a target='_blank'  title='Rent/Buy' href=" + watchLinks 
                     +"><i class='fa fa-film fa-2x' style='color:white;' aria-hidden='true'></i></a>" + "<br>"  + 
               "<div class='streamResults'></div>"
-            "</div>";  
+
+          var description =
+            "<div class='movieOverview hidden' data-name='"+ data.id +"'>" + descHead + descLinks + descbody
+                    + descViews + "</div>";
+
             movieResult = "<div class='movieContainer'><img class='movieResult z-depth-5' src=" + image + ">" + description + "</div>";
           $('.guidebox-search-results').append(movieResult);
           
