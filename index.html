@@ -9,6 +9,7 @@
   </head>
 
   <body>
+
     <h1 class="title"><a href="index.html">Guidebox Data</a></h1>
     <form class="guidebox-search-form" action="#">
       <label for="query"></label>
@@ -19,5 +20,20 @@
     </div>
     <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
     <script src="assets/js/logic.js"></script>
+
+      <!--Audio Elements-->
+      <audio controls>
+      <source src="roulette.wav" type="audio/wav">
+        Your browser does not support the audio element.
+      </audio>
+    
+      <script>
+      
+        function play(){
+          var audio = document.getElementById("audio");
+          audio.play();
+        }
+      </script>
+
   </body>
 </html>
