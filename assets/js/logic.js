@@ -9,6 +9,7 @@ $(document).ready(function() {
   var rottenTomEndpoint = "https://www.rottentomatoes.com/m/";
   //display popular movies by default on main page
   //search any movie title
+
   function searchGuideboxAPI(searchTerm, callback) {
       var query = guideboxEndpoint + searchTerm + '/fuzzy';
       $.getJSON(query, callback)
@@ -40,6 +41,7 @@ $(document).ready(function() {
   function displaySearchData(data){
   var apisDefaultImg = 'https://static-api.guidebox.com/misc/default_movie_240x342.jpg';
   if (data.results) {
+    $(".landing").fadeOut("slow");
     data.results.forEach(function(item) {
       var image = item.poster_240x342;
       if (image != apisDefaultImg) {
@@ -78,12 +80,12 @@ $(document).ready(function() {
 
           var descLinks = "<div class='movieLinks'>" +
                 "<a href=" + trailerVideo + " rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe'>"+
-                "<i class='fa fa-youtube-play fa-2x' style='color:red;' aria-hidden='true'></i>" +
+                "<i class='movieLinkIcon fa fa-youtube-play fa-2x' style='color:red;' aria-hidden='true'></i>" +
                 "</a>" +
-                "<a target='_blank' title='IMDB' href=" + imdbLink + "><img src='assets/images/imdb.png' height='25' width='25'></a>" +
+                "<a target='_blank' title='IMDB' href=" + imdbLink + "><img class='movieLinkIcon' src='assets/images/imdb.png' height='25' width='25'></a>" +
                 "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes 
-                    +"><img src='assets/images/rotten.png' height='25' width='25'></a>" +
-                "<a target='_blank'  title='Metacritic' href=" + metaCritic +"><img src='assets/images/Metacritic.png' height='25' width='25'></a>" +
+                    +"><img class='movieLinkIcon' src='assets/images/rotten.png' height='25' width='25'></a>" +
+                "<a target='_blank'  title='Metacritic' href=" + metaCritic +"><img class='movieLinkIcon' src='assets/images/Metacritic.png' height='25' width='25'></a>" +
               "</div>"
 
           var descbody = "<div class='castResults'></div>" +
@@ -97,7 +99,7 @@ $(document).ready(function() {
             "<div class='movieOverview hidden' data-name='"+ data.id +"'>" + descHead + descLinks + descbody
                     + descViews + "</div>";
 
-            movieResult = "<div class='movieContainer'><img class='movieResult z-depth-5' src=" + image + ">" + description + "</div>";
+            movieResult = "<div class='movieContainer valign-wrapper'><img class='movieResult z-depth-5' src=" + image + ">" + description + "</div>";
           $('.guidebox-search-results').append(movieResult);
           
           
@@ -116,12 +118,12 @@ $(document).ready(function() {
       event.preventDefault();
       var query = $(this).find('.guidebox-query').val();
       searchGuideboxAPI(query, displaySearchData);
-      $(".landing").hide();
+      
     });
   }
 
   $(document).on('click','#searchCall', function(){
-    $(".landing").show();
+    $(".landing").fadeIn("slow");
   });
 
 
@@ -154,6 +156,7 @@ $(document).ready(function() {
       event.preventDefault();
       var query = $(this).find('.guidebox-query').val();
       getSearchDataFromApi(query, displaySearchData);
+      
     });
   }
 
