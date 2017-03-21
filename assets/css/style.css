@@ -2,10 +2,7 @@ body {
   background: black;
   text-align: center;
   color: white;
-}
-
-nav {
-  background: black;
+  background-image: url("../images/background.png");
 }
 
 .movieContainer {
@@ -90,7 +87,6 @@ nav {
 
 .guidebox-search-form {
   margin-bottom: 20px;
-  width: 33%;
 }
 
 .hidden {
