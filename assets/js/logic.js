@@ -49,8 +49,8 @@ $(document).ready(function() {
 
   function displaySearchData(data){
   var apisDefaultImg = 'https://static-api.guidebox.com/misc/default_movie_240x342.jpg';
-  if (data.results) {
-    console.log(data.results);
+  if (data.results.length) {
+    console.log("data results: "+data.results);
     $(".landing").fadeOut("slow");
     data.results.forEach(function(item) {
       var image = item.poster_240x342;
@@ -99,7 +99,7 @@ $(document).ready(function() {
               "<span class='movieText'>" + movieDescription + "</span><br>"
 
           var descViews = "<h5 class='watch'> Rent or Buy </h5><div class='buyResults'></div>" + "<br>" +
-                        "<h5 class='watch'> Streaming On </h5><div class='streamResults'></div>"
+                        "<h5 class='watch'> Subscription Services </h5><div class='streamResults'></div>"
 
           var description =
               "<div class='movieOverview z-depth-5 hidden'" +"'>" + descHead + descLinks + descbody
@@ -113,8 +113,8 @@ $(document).ready(function() {
       }
     });
   } else {
-    noResults += '<p>Sorry we could not find anything with that title. <p>';
-    ('.guidebox-search-results').append(noResults);
+    var noResults = '<p><i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>Sorry we could not find anything with that term. <br>Please type a new term.</p>';
+    $('.guidebox-search-results').append(noResults);
     }
   };
   //wait for a submit click
