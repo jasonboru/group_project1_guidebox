@@ -113,7 +113,7 @@ $(document).ready(function() {
       }
     });
   } else {
-    var noResults = '<p><i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>Sorry we could not find anything with that term. <br>Please type a new term.</p>';
+    var noResults = '<p><i class="fa fa-exclamation-triangle fa-2x" aria-hidden="true"></i>Sorry, we could not find anything with that term. <br>Please type a new term.</p>';
     $('.guidebox-search-results').append(noResults);
     }
   };
@@ -177,7 +177,6 @@ $(document).ready(function() {
       
     });
   }
-
 
 
 });
