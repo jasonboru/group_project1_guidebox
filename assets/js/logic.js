@@ -39,7 +39,7 @@ $(document).ready(function() {
   }
 
   function rentBuySources(purchase) {
-      for(i=0; i<purchase.length; i++) {
+      for(i=0; i<6; i++) {
         //console.log(streamData[i].display_name);
         
         $(".buyResults").append("<a target='_blank' href="+purchase[i].link
@@ -65,15 +65,12 @@ $(document).ready(function() {
           var movieDescription = data.overview;
           var imdbLink = imdbEndpoint + data.imdb;
 
-          //console.log("___OMDB link for " + data.title+"___________")
-          //console.log(omdbEndpoint + data.imdb);
+          console.log("___OMDB link for " + data.title+"___________")
+          console.log(omdbEndpoint + data.imdb);
           //console.log("___Guidebox link for " + data.title+"___________")
           //console.log(trailerLinksURL);
 
           getDataFromOMDB(data.imdb);
-
-          //streamingSources(data.subscription_web_sources);
-          //showCast(data.cast);
 
           var rottenTomatoes = rottenTomEndpoint + data.rottentomatoes; 
           var commonSenseMedia = data.common_sense_media;
@@ -95,7 +92,7 @@ $(document).ready(function() {
                 "<a target='_blank' title='IMDB' href=" + imdbLink + "><img class='movieLinkIcon' src='assets/images/imdb.png' height='25' width='25'></a>" +
                 "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes 
                     +"><img class='movieLinkIcon' src='assets/images/rotten.png' height='25' width='25'></a>" +
-                "<a target='_blank'  title='Metacritic' href=" + metaCritic +"><img class='movieLinkIcon' src='assets/images/Metacritic.png' height='25' width='25'></a>" +
+                "<a target='_blank'  title='Metacritic'  href=" + metaCritic +"><img class='movieLinkIcon' src='assets/images/Metacritic.png' height='25' width='25'></a>" +
               "</div>"
 
           var descbody = "<div class='castResults'></div>" +
@@ -105,7 +102,7 @@ $(document).ready(function() {
                         "<h5 class='watch'> Streaming On </h5><div class='streamResults'></div>"
 
           var description =
-              "<div class='movieOverview hidden'" +"'>" + descHead + descLinks + descbody
+              "<div class='movieOverview z-depth-5 hidden'" +"'>" + descHead + descLinks + descbody
                     + descViews + "</div>";
 
             movieResult = "<div class='movieContainer valign-wrapper'><img data-ref="+data.id+" class='movieResult z-depth-5' src=" + image + ">" + description + "</div>";

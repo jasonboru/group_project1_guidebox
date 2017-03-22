@@ -75,8 +75,9 @@ input[type=text] {
   height: 362px;
   width: 60%;
   margin-bottom: 60px;
-  background-color: black;;
-  border-style: solid;
+  background-color: #000;
+  background-image: url("../images/overview_background.jpg");
+  background-size: cover;
   overflow: hidden;
   overflow-y: auto;
 }
