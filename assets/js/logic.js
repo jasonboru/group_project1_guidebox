@@ -11,7 +11,7 @@ $(document).ready(function() {
   //search any movie title
 
   function searchGuideboxAPI(searchTerm, callback) {
-      var query = guideboxEndpoint + searchTerm + '/fuzzy';
+      var query = guideboxEndpoint + searchTerm /*+ '/fuzzy'*/;
       $.getJSON(query, callback)
   };
   //grab ratings from OMDB api call
@@ -23,24 +23,34 @@ $(document).ready(function() {
     });
   };
 
-  /*function streamingSources(streamData) {
+  function streamingSources(streamData) {
       for(i=0; i<streamData.length; i++) {
-        console.log(streamData[i].display_name);
-        $(".streamResults").append("<a target='_blank' href="+streamData[i].display_link
-          +"><span>"+streamData[i].display_name+" </span></a>");
+        //console.log(streamData[i].display_name);
+        $(".streamResults").append("<a target='_blank' href="+streamData[i].link
+          +"><span class='streamLink'>"+streamData[i].display_name+"</span></a>");
       }
   }
 
     function showCast(cast) {
       for(i=0; i<6; i++) {
-        console.log(cast[i].name);
-        $(".castResults").append("<span>"+cast[i].name+" </span>");
+       
+        $(".castResults").append("<span class='castMem'>"+cast[i].name+"</span>");
       }
-  } */
+  }
+
+  function rentBuySources(purchase) {
+      for(i=0; i<purchase.length; i++) {
+        //console.log(streamData[i].display_name);
+        
+        $(".buyResults").append("<a target='_blank' href="+purchase[i].link
+          +"><span class='streamLink'>"+purchase[i].display_name+"</span></a>");
+      }
+  }
 
   function displaySearchData(data){
   var apisDefaultImg = 'https://static-api.guidebox.com/misc/default_movie_240x342.jpg';
   if (data.results) {
+    console.log(data.results);
     $(".landing").fadeOut("slow");
     data.results.forEach(function(item) {
       var image = item.poster_240x342;
@@ -55,10 +65,10 @@ $(document).ready(function() {
           var movieDescription = data.overview;
           var imdbLink = imdbEndpoint + data.imdb;
 
-          console.log("___OMDB link for " + data.title+"___________")
-          console.log(omdbEndpoint + data.imdb);
-          console.log("___Guidebox link for " + data.title+"___________")
-          console.log(trailerLinksURL);
+          //console.log("___OMDB link for " + data.title+"___________")
+          //console.log(omdbEndpoint + data.imdb);
+          //console.log("___Guidebox link for " + data.title+"___________")
+          //console.log(trailerLinksURL);
 
           getDataFromOMDB(data.imdb);
 
@@ -91,15 +101,14 @@ $(document).ready(function() {
           var descbody = "<div class='castResults'></div>" +
               "<span class='movieText'>" + movieDescription + "</span><br>"
 
-          var descViews = "<h5 class='watch'> Rent or Buy </h5>" + "<a target='_blank'  title='Rent/Buy' href=" + watchLinks 
-                    +"><i class='fa fa-film fa-2x' style='color:white;' aria-hidden='true'></i></a>" + "<br>"  + 
-              "<div class='streamResults'></div>"
+          var descViews = "<h5 class='watch'> Rent or Buy </h5><div class='buyResults'></div>" + "<br>" +
+                        "<h5 class='watch'> Streaming On </h5><div class='streamResults'></div>"
 
           var description =
-            "<div class='movieOverview hidden' data-name='"+ data.id +"'>" + descHead + descLinks + descbody
+              "<div class='movieOverview hidden'" +"'>" + descHead + descLinks + descbody
                     + descViews + "</div>";
 
-            movieResult = "<div class='movieContainer valign-wrapper'><img class='movieResult z-depth-5' src=" + image + ">" + description + "</div>";
+            movieResult = "<div class='movieContainer valign-wrapper'><img data-ref="+data.id+" class='movieResult z-depth-5' src=" + image + ">" + description + "</div>";
           $('.guidebox-search-results').append(movieResult);
           
           
@@ -123,6 +132,7 @@ $(document).ready(function() {
   }
 
   $(document).on('click','#searchCall', function(){
+    $('.guidebox-search-results').empty();
     $(".landing").fadeIn("slow");
   });
 
@@ -141,6 +151,17 @@ $(document).ready(function() {
           left: '30px'
       }, 1000);
     $(this).parent().find('.movieOverview').show(1000);
+    var cardURL = 'https://api-public.guidebox.com/v1.43/US/' + guideboxApiKey + '/movie/' + $(this).data("ref");
+    $.getJSON(cardURL, function(data){
+      $(".streamResults").empty();
+      $(".castResults").empty();
+      streamingSources(data.subscription_web_sources);
+      showCast(data.cast);
+      rentBuySources(data.purchase_web_sources);
+    });
+
+
+
   });
 
   $(document).on('click', '.active', function(){
