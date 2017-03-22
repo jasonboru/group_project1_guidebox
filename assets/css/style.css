@@ -53,7 +53,7 @@ input[type=text] {
 
 .movieResult {
   display: inline;
-  
+  height: 362px;
   margin-left: 15px;
   margin-right: 15px;
   margin-bottom: 10px;
