@@ -48,12 +48,13 @@ $(document).ready(function() {
   }
 
   function displaySearchData(data){
-  var apisDefaultImg = 'https://static-api.guidebox.com/misc/default_movie_240x342.jpg';
+  var apisDefaultImg = 'http://static-api.guidebox.com/misc/default_movie_240x342.jpg';
   if (data.results.length) {
     console.log("data results: "+data.results);
     $(".landing").fadeOut("slow");
     data.results.forEach(function(item) {
       var image = item.poster_240x342;
+      console.log("item", item, "image", image, "apis", apisDefaultImg);
       if (image !== apisDefaultImg) {
         //get movie details if image exists from api
         var trailerLinksURL = 'https://api-public.guidebox.com/v1.43/US/' + guideboxApiKey + '/movie/' + item.id;
