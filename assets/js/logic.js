@@ -32,7 +32,7 @@ $(document).ready(function() {
   }
 
     function showCast(cast) {
-      for(i=0; i<6; i++) {
+      for(i=0; i<8; i++) {
        
         $(".castResults").append("<span class='castMem'>"+cast[i].name+"</span>");
       }
@@ -54,7 +54,7 @@ $(document).ready(function() {
     $(".landing").fadeOut("slow");
     data.results.forEach(function(item) {
       var image = item.poster_240x342;
-      if (image != apisDefaultImg) {
+      if (image !== apisDefaultImg) {
         //get movie details if image exists from api
         var trailerLinksURL = 'https://api-public.guidebox.com/v1.43/US/' + guideboxApiKey + '/movie/' + item.id;
         //grab individual elements from movies to display in dom
@@ -65,10 +65,10 @@ $(document).ready(function() {
           var movieDescription = data.overview;
           var imdbLink = imdbEndpoint + data.imdb;
 
-          console.log("___OMDB link for " + data.title+"___________")
-          console.log(omdbEndpoint + data.imdb);
-          //console.log("___Guidebox link for " + data.title+"___________")
-          //console.log(trailerLinksURL);
+          //console.log("___OMDB link for " + data.title+"___________")
+          //console.log(omdbEndpoint + data.imdb);
+          console.log("___Guidebox link for " + data.title+"___________")
+          console.log(trailerLinksURL);
 
           getDataFromOMDB(data.imdb);
 
@@ -156,8 +156,6 @@ $(document).ready(function() {
       showCast(data.cast);
       rentBuySources(data.purchase_web_sources);
     });
-
-
 
   });
 
