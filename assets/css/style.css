@@ -5,6 +5,7 @@ body {
   background-image: url("../images/movie_bkg.png");
   background-size: cover;
   overflow-x:hidden;
+  font-family: 'Hind', sans-serif;
 }
 
 h1 {
@@ -36,6 +37,10 @@ input[type=text] {
 
 .btn, .btn:hover {
   background-color: rgba(0,0,0,0.5);
+}
+
+.btn:focus {
+
 }
 
 .movieContainer {
@@ -91,7 +96,7 @@ input[type=text] {
   padding-left: 40px;
   padding-right: 40px;
   padding-bottom: 20px;
-  border-bottom: 3px solid #808080;
+  border-bottom: 1px solid #808080;
 }
 
 .mpaa-rating {
@@ -128,6 +133,10 @@ input[type=text] {
   margin-bottom: 20px;
 }
 
+.guidebox-search-form:active {
+  color: #ffffff;
+}
+
 .hidden {
   display: none;
 }
@@ -145,5 +154,9 @@ span.featherlight-close-icon.featherlight-close {
   width: 10px;
   height: 10px;
   right: 0;
+}
+
+.streamResults {
+  padding-bottom: 30px;
 }
 
