@@ -22,25 +22,16 @@ h5 {
 
 #logo {
   padding-top: 7em;
+}
 
+.smallLogo {
+  display: hidden;
 }
 
 #searchCall {
   position:fixed;
   right: 2em;
   top: 2em;
-}
-
-input[type=text] {
-  border-bottom: 1px solid #000;
-}
-
-.btn, .btn:hover {
-  background-color: rgba(0,0,0,0.5);
-}
-
-.btn:focus {
-
 }
 
 .movieContainer {

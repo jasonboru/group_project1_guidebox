@@ -1,6 +1,6 @@
 $(document).ready(function() {
   var omdbEndpoint = "https://www.omdbapi.com/?i=";
-  var guideboxApiKey = '5de31aceff0f33007097cdd38a781d9ce2c97579';
+  var guideboxApiKey = '5de31aceff0f33007097cdd38a781d9ce2c97579'; //back up key bb5916942e7197cb1bbd1ba21afebb7bb1b57a51
   var guideboxEndpoint = 'https://api-public.guidebox.com/v1.43/us/' + guideboxApiKey + '/search/movie/title/';
   var quota = $.getJSON('https://api-public.guidebox.com/v1.43/us/' + guideboxApiKey + '/quota', function(data){
     console.log(data);
@@ -52,7 +52,7 @@ $(document).ready(function() {
   function displaySearchData(data){
   var apisDefaultImg = 'http://static-api.guidebox.com/misc/default_movie_240x342.jpg';
   if (data.results.length) {
-    console.log("data results: "+data.results);
+    //console.log("data results: "+data.results);
     $(".landing").fadeOut("slow");
     data.results.forEach(function(item) {
       var image = item.poster_240x342;
