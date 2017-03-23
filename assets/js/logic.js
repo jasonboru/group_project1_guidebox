@@ -1,4 +1,17 @@
 $(document).ready(function() {
+// Connect to firebase ******************************************************
+   
+   var config = {
+    apiKey: "AIzaSyBG_8gmapwWU4enNqmwEiYSxtkIhH09E_o",
+    authDomain: "streamius-da89c.firebaseapp.com",
+    databaseURL: "https://streamius-da89c.firebaseio.com",
+    storageBucket: "streamius-da89c.appspot.com",
+    messagingSenderId: "570746936002"
+  };
+  firebase.initializeApp(config);
+  var database = firebase.database();
+
+  // ************************************************************************
   var omdbEndpoint = "https://www.omdbapi.com/?i=";
   var guideboxApiKey = '5de31aceff0f33007097cdd38a781d9ce2c97579';
   var guideboxEndpoint = 'https://api-public.guidebox.com/v1.43/us/' + guideboxApiKey + '/search/movie/title/';
@@ -50,11 +63,13 @@ $(document).ready(function() {
   function displaySearchData(data){
   var apisDefaultImg = 'https://static-api.guidebox.com/misc/default_movie_240x342.jpg';
   if (data.results.length) {
+
     console.log("data results: "+data.results);
     $(".landing").fadeOut("slow");
     data.results.forEach(function(item) {
       var image = item.poster_240x342;
       if (image != apisDefaultImg) {
+
         //get movie details if image exists from api
         var trailerLinksURL = 'https://api-public.guidebox.com/v1.43/US/' + guideboxApiKey + '/movie/' + item.id;
         //grab individual elements from movies to display in dom
@@ -117,6 +132,17 @@ $(document).ready(function() {
     $('.guidebox-search-results').append(noResults);
     }
   };
+  
+  // send data to firebase
+  function dataFirebase(){
+    var fireTitle = $(".guidebox-query").val().trim();
+    database.ref().push({
+    fireTitle: fireTitle,
+    });
+
+    fireTitle = $(".guidebox-query").val("");
+  }
+
   //wait for a submit click
   function runOnSubmit(){
     $('.guidebox-search-form').submit(function(event){
@@ -124,7 +150,7 @@ $(document).ready(function() {
       event.preventDefault();
       var query = $(this).find('.guidebox-query').val();
       searchGuideboxAPI(query, displaySearchData);
-      
+     
     });
   }
 
@@ -139,6 +165,7 @@ $(document).ready(function() {
   });
 
   $(document).on('click','.movieResult', function(){
+    dataFirebase();
     $(this).addClass("active");
     $(this).parent().find('.movieOverview').removeClass('hidden');
     $(this).parent().find('.movieOverview').hide();
@@ -156,8 +183,6 @@ $(document).ready(function() {
       showCast(data.cast);
       rentBuySources(data.purchase_web_sources);
     });
-
-
 
   });
 
