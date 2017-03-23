@@ -22,7 +22,10 @@ h5 {
 
 #logo {
   padding-top: 7em;
+}
 
+.smallLogo {
+  display: hidden;
 }
 
 #searchCall {
