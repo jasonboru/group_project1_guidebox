@@ -116,6 +116,10 @@ h5 {
   text-decoration: none;
 }
 
+.castMem {
+  margin: 5px;
+}
+
 .watch {
   display: inline;
   padding-right: 10px;

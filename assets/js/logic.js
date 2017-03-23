@@ -1,8 +1,8 @@
 $(document).ready(function() {
   var omdbEndpoint = "https://www.omdbapi.com/?i=";
   var guideboxApiKey = '5de31aceff0f33007097cdd38a781d9ce2c97579'; //back up key bb5916942e7197cb1bbd1ba21afebb7bb1b57a51
-  var guideboxEndpoint = 'https://api-public.guidebox.com/v1.43/us/' + guideboxApiKey + '/search/movie/title/';
-  var quota = $.getJSON('https://api-public.guidebox.com/v1.43/us/' + guideboxApiKey + '/quota', function(data){
+  var guideboxEndpoint = 'http://api-public.guidebox.com/v2/us/' + guideboxApiKey + '/search/movie/title/';
+  var quota = $.getJSON('http://api-public.guidebox.com/v2/us/' + guideboxApiKey + '/quota', function(data){
     console.log(data);
   });
   var imdbEndpoint = "https://www.imdb.com/title/";
@@ -16,7 +16,7 @@ $(document).ready(function() {
 
   function searchGuideboxAPI(searchTerm, callback) {
       var query = guideboxEndpoint + searchTerm /*+ '/fuzzy'*/;
-      $.getJSON(query, callback)
+      $.getJSON(query, callback);
   };
   //grab ratings from OMDB api call
   function getDataFromOMDB(imdbLink) {
@@ -42,13 +42,22 @@ $(document).ready(function() {
 
   function showCast(cast) {
     for(i=0; i<8; i++) {
-      $(".castResults").append("<span class='castMem'>"+cast[i].name+"</span>");
+      $(".castResults").append("<button class='castMem btn waves-effect waves-light submit' data-castID='" + cast[i].id + "'>"+cast[i].name+"</button>");
     }
   }
 
-  function castingCall(person) {
-    
-  }
+  function castingCall(personID, callback) {
+    var castQuery = 'http://api-public.guidebox.com/v2/person/' + personID + '/credits?api_key=' + guideboxApiKey + '&role=cast';
+    console.log("castQuery is " + castQuery)
+      $.getJSON(castQuery, callback);
+  };
+
+  $(document).on('click','.castMem', function(){
+    $('.guidebox-search-results').empty();
+    var castData = $(this).attr('data-castID');
+    console.log("castID is " + castData)
+      castingCall(castData, displaySearchData);
+    });
 
   function rentBuySources(purchase) {
     for(i=0; i<6; i++) {
@@ -66,10 +75,10 @@ $(document).ready(function() {
     $("#logoSmall").fadeIn("slow");
     data.results.forEach(function(item) {
       var image = item.poster_240x342;
-      console.log("item", item, "image", image, "apis", apisDefaultImg);
+      //console.log("item", item, "image", image, "apis", apisDefaultImg);
       if (image !== apisDefaultImg) {
         //get movie details if image exists from api
-        var trailerLinksURL = 'https://api-public.guidebox.com/v1.43/US/' + guideboxApiKey + '/movie/' + item.id;
+        var trailerLinksURL = 'http://api-public.guidebox.com/v2/US/' + guideboxApiKey + '/movie/' + item.id;
         //grab individual elements from movies to display in dom
         $.getJSON(trailerLinksURL, function(data){
           var movieResult = '';
