@@ -180,3 +180,14 @@ span.featherlight-close-icon.featherlight-close {
   }
 }
 
+@media only screen and (max-width: 1920px) and (orientation : landscape) {
+  /* LANDSCAPE:
+  Windows Surface Pro*/
+  .active {
+    margin-left: 25px;
+  }
+
+  .movieOverview {
+    left: 419px;
+  }
+}
