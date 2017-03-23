@@ -40,20 +40,22 @@ $(document).ready(function() {
     }
   }
 
-    function showCast(cast) {
-      for(i=0; i<8; i++) {
-       
-        $(".castResults").append("<span class='castMem'>"+cast[i].name+"</span>");
-      }
+  function showCast(cast) {
+    for(i=0; i<8; i++) {
+      $(".castResults").append("<span class='castMem'>"+cast[i].name+"</span>");
+    }
+  }
+
+  function castingCall(person) {
+    
   }
 
   function rentBuySources(purchase) {
-      for(i=0; i<6; i++) {
-        //console.log(streamData[i].display_name);
-        
-        $(".buyResults").append("<a target='_blank' href="+purchase[i].link
+    for(i=0; i<6; i++) {
+      //console.log(streamData[i].display_name);
+      $(".buyResults").append("<a target='_blank' href="+purchase[i].link
           +"><span class='streamLink'>"+purchase[i].display_name+"</span></a>");
-      }
+    }
   }
 
   function displaySearchData(data){
