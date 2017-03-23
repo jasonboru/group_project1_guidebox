@@ -45,7 +45,7 @@ h5 {
 .movieResult {
   display: inline;
   height: 362px;
-  margin-left: 15px;
+  margin-left: 115px;
   margin-right: 15px;
   margin-bottom: 10px;
 }
@@ -67,7 +67,7 @@ h5 {
 .movieOverview {
   color: white;
   position: absolute;
-  left: 290px;
+  left: 519px;
   height: 362px;
   width: 60%;
   margin-bottom: 60px;
@@ -162,7 +162,8 @@ span.featherlight-close-icon.featherlight-close {
   .movieOverview {
     position: static;
     margin: 0 auto;
-    width: 60%;
+    width: 100%;
+    height: 100%;
     background-color: #000;
     background-image: url("../images/overview_background.jpg");
     margin-bottom: 30px;

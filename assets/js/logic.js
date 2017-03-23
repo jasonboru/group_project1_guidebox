@@ -12,6 +12,8 @@ $(document).ready(function() {
   //display popular movies by default on main page
   //search any movie title
 
+  $("#logoSmall").hide();
+
   function searchGuideboxAPI(searchTerm, callback) {
       var query = guideboxEndpoint + searchTerm /*+ '/fuzzy'*/;
       $.getJSON(query, callback)
@@ -26,11 +28,16 @@ $(document).ready(function() {
   };
 
   function streamingSources(streamData) {
+    if (streamData.length){
+
       for(i=0; i<streamData.length; i++) {
         //console.log(streamData[i].display_name);
         $(".streamResults").append("<a target='_blank' href="+streamData[i].link
           +"><span class='streamLink'>"+streamData[i].display_name+"</span></a>");
       }
+    } else {
+        $(".streamResults").append("none avaialable");
+    }
   }
 
     function showCast(cast) {
@@ -53,7 +60,8 @@ $(document).ready(function() {
   var apisDefaultImg = 'http://static-api.guidebox.com/misc/default_movie_240x342.jpg';
   if (data.results.length) {
     //console.log("data results: "+data.results);
-    $(".landing").fadeOut("slow");
+    $(".landing").hide();
+    $("#logoSmall").fadeIn("slow");
     data.results.forEach(function(item) {
       var image = item.poster_240x342;
       console.log("item", item, "image", image, "apis", apisDefaultImg);
@@ -135,12 +143,28 @@ $(document).ready(function() {
 
   $(document).on('click','#searchCall', function(){
     $('.guidebox-search-results').empty();
+    $("#logoSmall").hide();
     $(".landing").fadeIn("slow");
   });
 
 
   $(function(){    
     runOnSubmit();
+  });
+
+  $(function() {
+    $("#form").validate({
+      rules: {
+        titleTerm: {
+          required: true
+        } 
+      },
+      messages: {
+        required: 'please enter a search term'
+      },
+      errorElement : 'div',
+      errorLabelContainer: '.errorTxt'
+    });
   });
 
   $(document).on('click','.movieResult', function(){
@@ -150,13 +174,14 @@ $(document).ready(function() {
     $('.movieResult').hide();
     $('.active').show();
     $(this).animate({
-          left: '30px'
+          left: '130px'
       }, 1000);
     $(this).parent().find('.movieOverview').show(1000);
     var cardURL = 'https://api-public.guidebox.com/v1.43/US/' + guideboxApiKey + '/movie/' + $(this).data("ref");
     $.getJSON(cardURL, function(data){
       $(".streamResults").empty();
       $(".castResults").empty();
+      $(".buyResults").empty();
       streamingSources(data.subscription_web_sources);
       showCast(data.cast);
       rentBuySources(data.purchase_web_sources);

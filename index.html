@@ -25,18 +25,21 @@
   <body>
 
     <div>
+
       <!-- search icon (functioning as "home" button) -->
       <div id="searchCall" ><i class="fa fa-search fa-2x" aria-hidden='true'></i></div>
       <!-- logo -->
       <img class="responsive-img landing" id="logo" src="assets/images/logo_w_glasses.png">
+      <img class="responsive-img" id="logoSmall" src="assets/images/logo_small.png">
       <!-- content -->
       <h4 class="title landing">Enter a movie to find out where to stream it,<br>rent it, or buy it!</h4>
       <div class="row">
-        <div class="col s4 offset-s4">
-          <form class="guidebox-search-form landing" action="#">
+        <div class="formDiv col s8 offset-s2 m4 offset-m4">
+          <form id="form" class="guidebox-search-form landing">
             <div class="input-field">
               <label for="query"></label>
-              <input type="text" class="guidebox-query" placeholder="Enter a movie here">
+              <input type="text" class="guidebox-query" placeholder="Enter a movie here" name="titleTerm">
+              <div class=".errorTxt"></div>
             </div>
               <button class="btn waves-effect waves-light submit" type="submit" name="action" onclick="return">Action</button>
               <!--<button type="submit" name="submit" class="submit" onclick="return">Search</button>-->
@@ -44,6 +47,7 @@
         </div>  
       </div>
       <!-- div to dump search results -->
+
       <div class="guidebox-search-results"></div>
 
     </div>
@@ -51,7 +55,7 @@
     <!-- js links -->
     <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
     <script src="assets/featherlight-1.5.1/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.0.47/jquery.fancybox.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="assets/js/logic.js"></script>
     
   </body>
