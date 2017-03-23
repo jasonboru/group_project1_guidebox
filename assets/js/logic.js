@@ -7,6 +7,8 @@ $(document).ready(function() {
   });
   var imdbEndpoint = "https://www.imdb.com/title/";
   var rottenTomEndpoint = "https://www.rottentomatoes.com/m/";
+  var facebookEndpoint = "https://www.facebook.com/";
+  var wikipediaEndpoint = "https://en.wikipedia.org/?curid=";
   //display popular movies by default on main page
   //search any movie title
 
@@ -78,6 +80,8 @@ $(document).ready(function() {
           var metaCritic = data.metacritic;
           var trailerVideo = data.trailers.web[0].embed;          
           var watchLinks = data.purchase_web_sources[0].link;
+          var facebook = facebookEndpoint + data.social.facebook.facebook_id;
+          var wikipedia = wikipediaEndpoint + data.wikipedia_id;
 
 
           var descHead = "<h1 class='movie-title'>" + data.title + "</h1>" +
@@ -87,14 +91,14 @@ $(document).ready(function() {
               "<h5 class='genre'> Genre: " + genre + "</h5>"
 
           var descLinks = "<div class='movieLinks'>" +
-                "<a href=" + trailerVideo + " rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe'>"+
-                "<i class='movieLinkIcon fa fa-youtube-play fa-2x' style='color:red;' aria-hidden='true'></i>" +
-                "</a>" +
+                "<a href=" + trailerVideo + " rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe' id='trailerLink'>" +
+                "<img class='movieLinkIcon' src='assets/images/trailer.png' height='25' width='25'></a>" +
                 "<a target='_blank' title='IMDB' href=" + imdbLink + "><img class='movieLinkIcon' src='assets/images/imdb.png' height='25' width='25'></a>" +
                 "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes 
                     +"><img class='movieLinkIcon' src='assets/images/rotten.png' height='25' width='25'></a>" +
                 "<a target='_blank'  title='Metacritic'  href=" + metaCritic +"><img class='movieLinkIcon' src='assets/images/Metacritic.png' height='25' width='25'></a>" +
-              "</div>"
+                "<a target='_blank' title='Facebook' href=" + facebook + "><img class='movieLinkIcon' src='assets/images/facebook.png' height='25' width='25'></a>" +
+                "<a target='_blank' title='Wikipedia' href=" + wikipedia + "><img class='movieLinkIcon' src='assets/images/wikipedia.png' height='25' width='25'></a>" + "</div>"
 
           var descbody = "<div class='castResults'></div>" +
               "<span class='movieText'>" + movieDescription + "</span><br>"

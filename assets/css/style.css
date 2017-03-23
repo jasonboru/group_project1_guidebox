@@ -151,6 +151,10 @@ span.featherlight-close-icon.featherlight-close {
   padding-bottom: 30px;
 }
 
+#trailerLink {
+  
+}
+
 @media only screen and (max-width: 768px) {
   .movieResult {
     position: static;
