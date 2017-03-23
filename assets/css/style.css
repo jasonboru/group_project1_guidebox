@@ -59,7 +59,7 @@ h5 {
   margin-top: 4em;
 }
 
-.active {
+.activeCard {
   position: absolute;
   left: 300;
   margin-left: 115px;
@@ -175,7 +175,7 @@ span.featherlight-close-icon.featherlight-close {
     padding: 0px 5px 5px 5px;
   }
 
-  .active {
+  .activeCard {
     margin-left: 15px;
   }
 }
@@ -183,7 +183,7 @@ span.featherlight-close-icon.featherlight-close {
 @media only screen and (max-width: 1920px) and (orientation : landscape) {
   /* LANDSCAPE:
   Windows Surface Pro*/
-  .active {
+  .activeCard {
     margin-left: 25px;
   }
 

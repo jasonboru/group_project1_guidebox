@@ -1,3 +1,7 @@
+$(document).ready(function(){
+  $('ul.tabs').tabs();
+});
+
 $(document).ready(function() {
   var omdbEndpoint = "https://www.omdbapi.com/?i=";
   var guideboxApiKey = '5de31aceff0f33007097cdd38a781d9ce2c97579'; //back up key bb5916942e7197cb1bbd1ba21afebb7bb1b57a51
@@ -13,6 +17,7 @@ $(document).ready(function() {
   //search any movie title
 
   $("#logoSmall").hide();
+    
 
   function searchGuideboxAPI(searchTerm, callback) {
       var query = guideboxEndpoint + searchTerm /*+ '/fuzzy'*/;
@@ -103,13 +108,14 @@ $(document).ready(function() {
           var wikipedia = wikipediaEndpoint + data.wikipedia_id;
 
 
-          var descHead = "<h1 class='movie-title'>" + data.title + "</h1>" +
+          var descHead = "<div id='descHead' class='col s12'>" + "<h1 class='movie-title'>" + data.title + "</h1>" +
               "<h3 class='mpaa-rating'> Rated: " + rated +
               "<a class='commonsense' target='_blank' title='Common Sense Media' href=" 
                     + commonSenseMedia + " ><i class='fa fa-check-circle-o' aria-hidden='true'></i></a><br>" +"</h3>" +
-              "<h5 class='genre'> Genre: " + genre + "</h5>"
+              "<h5 class='genre'> Genre: " + genre + "</h5>" +
+              "<span class='movieText'>" + movieDescription + "</span><br>" + "</div>" 
 
-          var descLinks = "<div class='movieLinks'>" +
+          var descLinks = "<div id='descLinks' class='movieLinks col s12'>" +
                 "<a href=" + trailerVideo + " rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe' id='trailerLink'>" +
                 "<img class='movieLinkIcon' src='assets/images/trailer.png' height='25' width='25'></a>" +
                 "<a target='_blank' title='IMDB' href=" + imdbLink + "><img class='movieLinkIcon' src='assets/images/imdb.png' height='25' width='25'></a>" +
@@ -119,18 +125,22 @@ $(document).ready(function() {
                 "<a target='_blank' title='Facebook' href=" + facebook + "><img class='movieLinkIcon' src='assets/images/facebook.png' height='25' width='25'></a>" +
                 "<a target='_blank' title='Wikipedia' href=" + wikipedia + "><img class='movieLinkIcon' src='assets/images/wikipedia.png' height='25' width='25'></a>" + "</div>"
 
-          var descbody = "<div class='castResults'></div>" +
-              "<span class='movieText'>" + movieDescription + "</span><br>"
 
-          var descViews = "<h5 class='watch'> Rent or Buy </h5><div class='buyResults'></div>" + "<br>" +
-                        "<h5 class='watch'> Subscription Services </h5><div class='streamResults'></div>"
+          var descCast = "<div id='descCast' class='castResults col s12'></div>"
 
-          var description =
-              "<div class='movieOverview z-depth-5 hidden'" +"'>" + descHead + descLinks + descbody
-                    + descViews + "</div>";
+          var descViews = "<div id='descViews' class='col s12'>" + "<h5 class='watch'> Rent or Buy </h5><div class='buyResults'></div>" + "<br>" +
+                        "<h5 class='watch'> Subscription Services </h5><div class='streamResults'></div>" + "</div>"
+
+          var description = "<div class='movieOverview z-depth-5 hidden row'>" + "<div class='col s12'>" + "<ul class='tabs'>" + 
+                                "<li class='tab col s3'><a href='#descHead'>Main</a></li>" +
+                                "<li class='tab col s3'><a href='#descViews'>Watch</a></li>" +
+                                "<li class='tab col s3'><a href='#descCast'>Cast</a></li>" +
+                                "<li class='tab col s3'><a href='#descLinks'>Links</a></li>" + "</ul>" + "</div>" +
+                            descHead + descViews + descLinks + descCast + "</div>";
 
             movieResult = "<div class='movieContainer valign-wrapper'><img data-ref="+data.id+" class='movieResult z-depth-5' src=" + image + ">" + description + "</div>";
           $('.guidebox-search-results').append(movieResult);
+          $('ul.tabs').tabs();
           
           
         });
@@ -179,11 +189,11 @@ $(document).ready(function() {
   });
 
   $(document).on('click','.movieResult', function(){
-    $(this).addClass("active");
+    $(this).addClass("activeCard");
     $(this).parent().find('.movieOverview').removeClass('hidden');
     $(this).parent().find('.movieOverview').hide();
     $('.movieResult').hide();
-    $('.active').show();
+    $('.activeCard').show();
     $(this).animate({
           left: '130px'
       }, 1000);
@@ -200,8 +210,8 @@ $(document).ready(function() {
 
   });
 
-  $(document).on('click', '.active', function(){
-    $(this).removeClass('active');
+  $(document).on('click', '.activeCard', function(){
+    $(this).removeClass('activeCard');
     $('.movieResult').show();
     $('.movieOverview').addClass('hidden');
   });
