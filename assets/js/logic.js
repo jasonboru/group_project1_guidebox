@@ -50,7 +50,7 @@ $(document).ready(function() {
   function displaySearchData(data){
   var apisDefaultImg = 'http://static-api.guidebox.com/misc/default_movie_240x342.jpg';
   if (data.results.length) {
-    console.log("data results: "+data.results);
+    //console.log("data results: "+data.results);
     $(".landing").fadeOut("slow");
     data.results.forEach(function(item) {
       var image = item.poster_240x342;

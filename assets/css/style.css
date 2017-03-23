@@ -31,18 +31,6 @@ h5 {
   top: 2em;
 }
 
-input[type=text] {
-  border-bottom: 1px solid #000;
-}
-
-.btn, .btn:hover {
-  background-color: rgba(0,0,0,0.5);
-}
-
-.btn:focus {
-
-}
-
 .movieContainer {
   display: inline;
 }
