@@ -1,7 +1,3 @@
-$(document).ready(function(){
-  $('ul.tabs').tabs();
-});
-
 $(document).ready(function() {
   var omdbEndpoint = "https://www.omdbapi.com/?i=";
   var guideboxApiKey = '5de31aceff0f33007097cdd38a781d9ce2c97579'; //back up key bb5916942e7197cb1bbd1ba21afebb7bb1b57a51
@@ -14,6 +10,9 @@ $(document).ready(function() {
   var facebookEndpoint = "https://www.facebook.com/";
   var wikipediaEndpoint = "https://en.wikipedia.org/?curid=";
   //display popular movies by default on main page
+
+  var nytMovieKey = "20ef8a21506e4a07854339d77f1c8ac2";
+  var nytMovieEndpoint = "https://api.nytimes.com/svc/movies/v2/reviews/search.json";
   //search any movie title
 
   $("#logoSmall").hide();
@@ -34,7 +33,6 @@ $(document).ready(function() {
 
   function streamingSources(streamData) {
     if (streamData.length){
-
       for(i=0; i<streamData.length; i++) {
         //console.log(streamData[i].display_name);
         $(".streamResults").append("<a target='_blank' href="+streamData[i].link
@@ -46,7 +44,7 @@ $(document).ready(function() {
   }
 
   function showCast(cast) {
-    for(i=0; i<cast.length; i++) {
+    for(i=0; i<15; i++) {
       $(".castResults").append("<button class='castMem btn waves-effect waves-light submit' data-castID='" + cast[i].id + "'>"+cast[i].name+"</button>");
     }
   }
@@ -65,12 +63,20 @@ $(document).ready(function() {
     });
 
   function rentBuySources(purchase) {
-    for(i=0; i<6; i++) {
-      //console.log(streamData[i].display_name);
-      $(".buyResults").append("<a target='_blank' href="+purchase[i].link
+    if (purchase.length){
+      for(i=0; i<6; i++) {
+      console.log("where to buy"+purchase[i].display_name);
+        $(".buyResults").append("<a target='_blank' href="+purchase[i].link
           +"><button class='streamLink btn waves-effect waves-light'>"+purchase[i].display_name+"</button></a>");
+      }
+    } else {
+        $(".buyResults").append("none avaialable");
     }
   }
+
+  //document.addEventListener("DOMNodeInserted", function(event) {
+  //    $('ul.tabs').tabs();
+  //});
 
   function displaySearchData(data){
   var apisDefaultImg = 'http://static-api.guidebox.com/misc/default_movie_240x342.jpg';
@@ -116,14 +122,14 @@ $(document).ready(function() {
               "<p class='movieText'>" + movieDescription + "</p><br>" + "</div>" 
 
           var descLinks = "<div id='descLinks' class='movieLinks col s12'>" +
-                "<a href=" + trailerVideo + " rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe' id='trailerLink'>" +
-                "<img class='movieLinkIcon' src='assets/images/play_trailer.png' height='100' width='100'></a>" +
-                "<a target='_blank' title='IMDB' href=" + imdbLink + "><img class='movieLinkIcon' src='assets/images/imdb.png' height='100' width='100'></a>" +
-                "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes 
+              "<a href=" + trailerVideo + " rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe' id='trailerLink'>" +
+              "<img class='movieLinkIcon' src='assets/images/play_trailer.png' height='100' width='100'></a>" +
+              "<a target='_blank' title='IMDB' href=" + imdbLink + "><img class='movieLinkIcon' src='assets/images/imdb.png' height='100' width='100'></a>" +
+              "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes 
                     +"><img class='movieLinkIcon' src='assets/images/rotten.png' height='100' width='100'></a>" +
-                "<a target='_blank'  title='Metacritic'  href=" + metaCritic +"><img class='movieLinkIcon' src='assets/images/Metacritic.png' height='100' width='100'></a>" +
-                "<a target='_blank' title='Facebook' href=" + facebook + "><img class='movieLinkIcon' src='assets/images/facebook.png' height='100' width='100'>" +
-                "<a target='_blank' title='Wikipedia' href=" + wikipedia + "><img class='movieLinkIcon' src='assets/images/wikipedia.png' height='100' width='100'></a>" + "</div>"
+              "<a target='_blank'  title='Metacritic'  href=" + metaCritic +"><img class='movieLinkIcon' src='assets/images/Metacritic.png' height='100' width='100'></a>" +
+              "<a target='_blank' title='Facebook' href=" + facebook + "><img class='movieLinkIcon' src='assets/images/facebook.png' height='100' width='100'>" +
+              "<a target='_blank' title='Wikipedia' href=" + wikipedia + "><img class='movieLinkIcon' src='assets/images/wikipedia.png' height='100' width='100'></a>" + "</div>"
 
 
           var descCast = "<div id='descCast' class='col s12'><h1 class='watch'> Cast </h1><div class='castResults'></div></div>"   
@@ -136,13 +142,12 @@ $(document).ready(function() {
                                 "<li class='tab col s3'><a href='#descViews'>Watch</a></li>" +
                                 "<li class='tab col s3'><a href='#descCast'>Cast</a></li>" +
                                 "<li class='tab col s3'><a href='#descLinks'>Links</a></li>" + "</ul>" + "</div>" +
-                            descHead + descViews + descLinks + descCast + "</div>";
+                              descHead + descViews + descLinks + descCast + "</div>";
 
-            movieResult = "<div class='movieContainer valign-wrapper'><img data-ref="+data.id+" class='movieResult z-depth-5' src=" + image + ">" + description + "</div>";
+          movieResult = "<div class='movieContainer valign-wrapper'><img data-ref="+data.id+" class='movieResult z-depth-5' src=" + image + ">" + description + "</div>";
+          
           $('.guidebox-search-results').append(movieResult);
-          $('ul.tabs').tabs();
-          
-          
+          $('ul.tabs').tabs();          
         });
       }
     });
@@ -151,6 +156,7 @@ $(document).ready(function() {
     $('.guidebox-search-results').append(noResults);
     }
   };
+
   //wait for a submit click
   function runOnSubmit(){
     $('.guidebox-search-form').submit(function(event){
@@ -160,9 +166,9 @@ $(document).ready(function() {
       searchGuideboxAPI(query, displaySearchData);
       
     });
-  }
+  }  
 
-  $(document).on('click','#searchCall', function(){
+  $(document).on('click','.searchCall', function(){
     $('.guidebox-search-results').empty();
     $("#logoSmall").hide();
     $(".landing").fadeIn("slow");
@@ -188,26 +194,27 @@ $(document).ready(function() {
     });
   });
 
-  $(document).on('click','.movieResult', function(){
-    $(this).addClass("activeCard");
-    $(this).parent().find('.movieOverview').removeClass('hidden');
-    $(this).parent().find('.movieOverview').hide();
-    $('.movieResult').hide();
-    $('.activeCard').show();
-    $(this).animate({
-          left: '130px'
-      }, 1000);
-    $(this).parent().find('.movieOverview').show(1000);
-    var cardURL = 'https://api-public.guidebox.com/v1.43/US/' + guideboxApiKey + '/movie/' + $(this).data("ref");
-    $.getJSON(cardURL, function(data){
-      $(".streamResults").empty();
-      $(".castResults").empty();
-      $(".buyResults").empty();
-      streamingSources(data.subscription_web_sources);
-      showCast(data.cast);
-      rentBuySources(data.purchase_web_sources);
-    });
-
+  $(document).on('click','.movieResult', function(event){
+    //if(event.detail==1){
+      $(this).addClass("activeCard");
+      $(this).parent().find('.movieOverview').removeClass('hidden');
+      $(this).parent().find('.movieOverview').hide();
+      $('.movieResult').hide();
+      $('.activeCard').show();
+      $(this).animate({
+            left: '130px'
+        }, 2000);
+      $(this).parent().find('.movieOverview').show(1000);
+      var cardURL = 'https://api-public.guidebox.com/v1.43/US/' + guideboxApiKey + '/movie/' + $(this).data("ref");
+      $.getJSON(cardURL, function(data){
+        $(".streamResults").empty();
+        $(".castResults").empty();
+        $(".buyResults").empty();
+        streamingSources(data.subscription_web_sources);
+        showCast(data.cast);
+        rentBuySources(data.purchase_web_sources);
+      });
+    //}
   });
 
   $(document).on('click', '.activeCard', function(){
@@ -217,15 +224,15 @@ $(document).ready(function() {
   });
 
   //wait for a submit click
-  function watchSubmit(){
-    $('.guidebox-search-form').submit(function(event){
-      $('.guidebox-search-results').empty();
-      event.preventDefault();
-      var query = $(this).find('.guidebox-query').val();
-      getSearchDataFromApi(query, displaySearchData);
-      
-    });
-  }
+  //function watchSubmit(){
+    //$('.guidebox-search-form').submit(function(event){
+      //$('.guidebox-search-results').empty();
+      //event.preventDefault();
+      //var query = $(this).find('.guidebox-query').val();
+      //getSearchDataFromApi(query, displaySearchData);
+      //
+    //});
+  //}
 
 
 });
