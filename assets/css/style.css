@@ -1,7 +1,7 @@
 body {
   background: black;
+  color: #fff;
   text-align: center;
-  color: white;
   background-image: url("../images/movie_bkg.png");
   background-size: cover;
   overflow-x:hidden;
@@ -9,7 +9,8 @@ body {
 }
 
 h1 {
-      font-size: 2em;
+      font-size: 2.5em;
+      color: #d46e61;
 }
 
 h3 {
@@ -23,12 +24,16 @@ h5 {
 #logo {
   padding-top: 7em;
 }
+.title {
+  color: #fff;
+}
 
 .smallLogo {
   display: hidden;
 }
 
 #searchCall {
+  color: #fff;
   position:fixed;
   right: 2em;
   top: 2em;
@@ -40,6 +45,14 @@ h5 {
 
 .streamLink, .castMem {
   margin: 0 .5em;
+}
+
+#descViews, #descCast, #descLinks {
+  margin-top: 40px;
+}
+
+.tabs {
+  overflow-x: hidden;
 }
 
 .movieResult {
@@ -66,23 +79,23 @@ h5 {
 }
 
 .movieOverview {
-  color: white;
+  color: #000;
   position: absolute;
   left: 519px;
   height: 362px;
   width: 60%;
   margin-bottom: 60px;
-  background-color: #000;
-  background-image: url("../images/overview_background.jpg");
+  background-image: url("../images/white_film_background.jpg");
   background-size: cover;
   overflow: hidden;
+
   overflow-y: auto;
 }
 
 .movieText {
   display: block;
   font-weight:lighter;
-  font-size: 12px;
+  font-size: 20px;
   text-align: justify;
   left: 35px;
   padding-left: 40px;
@@ -156,8 +169,8 @@ span.featherlight-close-icon.featherlight-close {
   padding-bottom: 30px;
 }
 
-#trailerLink {
-  
+.linkTable{
+  width: auto;
 }
 
 @media only screen and (max-width: 768px) {
@@ -180,9 +193,9 @@ span.featherlight-close-icon.featherlight-close {
   }
 }
 
-@media only screen and (max-width: 1920px) and (orientation : landscape) {
-  /* LANDSCAPE:
-  Windows Surface Pro*/
+/*@media only screen and (max-width: 1920px) and (orientation : landscape) {
+  // LANDSCAPE:
+  //Windows Surface Pro
   .activeCard {
     margin-left: 25px;
   }
@@ -190,4 +203,4 @@ span.featherlight-close-icon.featherlight-close {
   .movieOverview {
     left: 419px;
   }
-}
+} */

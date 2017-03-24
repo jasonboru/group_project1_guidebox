@@ -38,7 +38,7 @@ $(document).ready(function() {
       for(i=0; i<streamData.length; i++) {
         //console.log(streamData[i].display_name);
         $(".streamResults").append("<a target='_blank' href="+streamData[i].link
-          +"><span class='streamLink'>"+streamData[i].display_name+"</span></a>");
+          +"><button class='streamLink btn waves-effect waves-light'>"+streamData[i].display_name+"</button></a>");
       }
     } else {
         $(".streamResults").append("none avaialable");
@@ -46,7 +46,7 @@ $(document).ready(function() {
   }
 
   function showCast(cast) {
-    for(i=0; i<8; i++) {
+    for(i=0; i<cast.length; i++) {
       $(".castResults").append("<button class='castMem btn waves-effect waves-light submit' data-castID='" + cast[i].id + "'>"+cast[i].name+"</button>");
     }
   }
@@ -68,7 +68,7 @@ $(document).ready(function() {
     for(i=0; i<6; i++) {
       //console.log(streamData[i].display_name);
       $(".buyResults").append("<a target='_blank' href="+purchase[i].link
-          +"><span class='streamLink'>"+purchase[i].display_name+"</span></a>");
+          +"><button class='streamLink btn waves-effect waves-light'>"+purchase[i].display_name+"</button></a>");
     }
   }
 
@@ -111,25 +111,25 @@ $(document).ready(function() {
           var descHead = "<div id='descHead' class='col s12'>" + "<h1 class='movie-title'>" + data.title + "</h1>" +
               "<h3 class='mpaa-rating'> Rated: " + rated +
               "<a class='commonsense' target='_blank' title='Common Sense Media' href=" 
-                    + commonSenseMedia + " ><i class='fa fa-check-circle-o' aria-hidden='true'></i></a><br>" +"</h3>" +
+                    + commonSenseMedia + " ><img src='assets/images/commonsense.png' height='40' width='40'></a><br>" +"</h3>" +
               "<h5 class='genre'> Genre: " + genre + "</h5>" +
-              "<span class='movieText'>" + movieDescription + "</span><br>" + "</div>" 
+              "<p class='movieText'>" + movieDescription + "</p><br>" + "</div>" 
 
           var descLinks = "<div id='descLinks' class='movieLinks col s12'>" +
                 "<a href=" + trailerVideo + " rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe' id='trailerLink'>" +
-                "<img class='movieLinkIcon' src='assets/images/trailer.png' height='25' width='25'></a>" +
-                "<a target='_blank' title='IMDB' href=" + imdbLink + "><img class='movieLinkIcon' src='assets/images/imdb.png' height='25' width='25'></a>" +
+                "<img class='movieLinkIcon' src='assets/images/play_trailer.png' height='100' width='100'></a>" +
+                "<a target='_blank' title='IMDB' href=" + imdbLink + "><img class='movieLinkIcon' src='assets/images/imdb.png' height='100' width='100'></a>" +
                 "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes 
-                    +"><img class='movieLinkIcon' src='assets/images/rotten.png' height='25' width='25'></a>" +
-                "<a target='_blank'  title='Metacritic'  href=" + metaCritic +"><img class='movieLinkIcon' src='assets/images/Metacritic.png' height='25' width='25'></a>" +
-                "<a target='_blank' title='Facebook' href=" + facebook + "><img class='movieLinkIcon' src='assets/images/facebook.png' height='25' width='25'></a>" +
-                "<a target='_blank' title='Wikipedia' href=" + wikipedia + "><img class='movieLinkIcon' src='assets/images/wikipedia.png' height='25' width='25'></a>" + "</div>"
+                    +"><img class='movieLinkIcon' src='assets/images/rotten.png' height='100' width='100'></a>" +
+                "<a target='_blank'  title='Metacritic'  href=" + metaCritic +"><img class='movieLinkIcon' src='assets/images/Metacritic.png' height='100' width='100'></a>" +
+                "<a target='_blank' title='Facebook' href=" + facebook + "><img class='movieLinkIcon' src='assets/images/facebook.png' height='100' width='100'>" +
+                "<a target='_blank' title='Wikipedia' href=" + wikipedia + "><img class='movieLinkIcon' src='assets/images/wikipedia.png' height='100' width='100'></a>" + "</div>"
 
 
-          var descCast = "<div id='descCast' class='castResults col s12'></div>"
+          var descCast = "<div id='descCast' class='col s12'><h1 class='watch'> Cast </h1><div class='castResults'></div></div>"   
 
-          var descViews = "<div id='descViews' class='col s12'>" + "<h5 class='watch'> Rent or Buy </h5><div class='buyResults'></div>" + "<br>" +
-                        "<h5 class='watch'> Subscription Services </h5><div class='streamResults'></div>" + "</div>"
+          var descViews = "<div id='descViews' class='col s12'>" + "<h1 class='watch'> Rent or Buy </h1><div class='buyResults'></div>" + "<br>" +
+                        "<h1 class='watch'> Subscription Services </h1><div class='streamResults'></div>" + "</div>"
 
           var description = "<div class='movieOverview z-depth-5 hidden row'>" + "<div class='col s12'>" + "<ul class='tabs'>" + 
                                 "<li class='tab col s3'><a href='#descHead'>Main</a></li>" +
