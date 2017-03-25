@@ -157,7 +157,7 @@ $(document).ready(function() {
           var commonSenseMedia = data.common_sense_media||false;
           var metaCritic = data.metacritic||false;
           //console.log(metaCritic);
-          var trailerVideo = data.trailers.web[0].embed||false;
+          var trailerVideo = data.trailers.web[0].embed||[false];
           var facebook = facebookEndpoint + data.social.facebook.facebook_id||false;
           var wikipedia = wikipediaEndpoint + data.wikipedia_id||false;
 
