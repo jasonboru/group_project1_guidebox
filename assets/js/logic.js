@@ -1,10 +1,10 @@
 $(document).ready(function() {
   var omdbEndpoint = "https://www.omdbapi.com/?i=";
   var guideboxApiKey = 'bb5916942e7197cb1bbd1ba21afebb7bb1b57a51'; //back up key 5de31aceff0f33007097cdd38a781d9ce2c97579
-  var guideboxEndpoint = 'http://api-public.guidebox.com/v2/us/' + guideboxApiKey + '/search/movie/title/';  
+  var guideboxEndpoint = 'https://api-public.guidebox.com/v2/us/' + guideboxApiKey + '/search/movie/title/';  
 
   //An Api call for our current Keys quota
-  var quota = $.getJSON('http://api-public.guidebox.com/v2/us/' + guideboxApiKey + '/quota', function(data){
+  var quota = $.getJSON('https://api-public.guidebox.com/v2/us/' + guideboxApiKey + '/quota', function(data){
     console.log(data);  //this helps us keep track of our Search limit. Each Key has 15K per month.
   });
 
@@ -123,7 +123,7 @@ $(document).ready(function() {
       var image = item.poster_240x342;    //var image is the poster for each result
       if (image !== apisDefaultImg) {     //if image is not default then proceed (ignore results with no poster)
         //building a new url to use for Ajax call for more details on the movie
-        var trailerLinksURL = 'http://api-public.guidebox.com/v2/US/' + guideboxApiKey + '/movie/' + item.id;
+        var trailerLinksURL = 'https://api-public.guidebox.com/v2/US/' + guideboxApiKey + '/movie/' + item.id;
         //grab individual elements from movies to display in dom
         $.getJSON(trailerLinksURL, function(data){
           var movieResult = '';                     //set movieResult as a string
