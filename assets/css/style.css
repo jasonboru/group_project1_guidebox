@@ -63,6 +63,14 @@ h5 {
   margin-bottom: 10px;
 }
 
+.LinksDiv {
+  margin-top: 120px;
+}
+
+.castDiv, .viewsDiv {
+  margin-top: 70px;
+}
+
 .movie-title {
   margin-bottom: 5px;
 }
@@ -192,8 +200,11 @@ span.featherlight-close-icon.featherlight-close {
   }
 
   .movieText {
-    font-size: 12px;
-   
+    font-size: 12px;   
+  }
+
+  .LinksDiv, .castDiv, .viewsDiv {
+  margin-top: 30px;
   }
 }
 

@@ -15,7 +15,7 @@ $(document).ready(function() {
 
   //variable for the NYT movie revie API I would like to add in
   var nytMovieKey = "20ef8a21506e4a07854339d77f1c8ac2";
-  var nytMovieEndpoint = "https://api.nytimes.com/svc/movies/v2/reviews/search.json";
+  var nytMovieEndpoint = "https://api.nytimes.com/svc/movies/v2/reviews/search.json?api_key=";
    // added firebase
   var config = {
     apiKey: "AIzaSyBG_8gmapwWU4enNqmwEiYSxtkIhH09E_o",
@@ -39,6 +39,24 @@ $(document).ready(function() {
     }); 
      fireTitle = $(".guidebox-query").val("");
   };  
+
+
+
+  function nytReviewCall(movie, callback){
+    nytMovie = "'" + movie.replace(/\s/g, "+") + "'";
+    console.log("nyt movie var = " + movie);
+    var nytUrl = nytMovieEndpoint + nytMovieKey + "&query=" + nytMovie;
+    $.getJSON(nytUrl, callback)
+  };
+
+  /*function postReview(nyt){
+    var reviewUrl = nyt.results[0].link.url
+    console.log("NYT article " + reviewUrl)
+    $("#nytReviewLink").append("<a target='_blank' title='NYT' href=" + reviewUrl + 
+                "><img class='movieLinkIcon' src='assets/images/nyt.png'></a>");
+  }*/
+
+
   //function to run the API call for movies matching the search term give
   function searchGuideboxAPI(searchTerm, callback) {
       var query = guideboxEndpoint + searchTerm ;
@@ -129,6 +147,19 @@ $(document).ready(function() {
 
           //getDataFromOMDB(data.imdb);             //a call for OMDB data once we figure what we want to pull
 
+
+          /*function postReview(nyt){
+            var reviewUrl = nyt.results[0].link.url||false;
+            console.log("NYT article " + reviewUrl)
+
+            $("#nytReviewLink").append("<a target='_blank' title='NYT' href='" + reviewUrl + 
+                        "'><img class='movieLinkIcon' src='assets/images/nyt.png' height='100' width='100'></a>");
+          }
+
+          nytReviewCall(data.title, postReview); */
+
+
+
           //build out variables for the various links
           var rottenTomatoes = rottenTomEndpoint + data.rottentomatoes||false;
           var commonSenseMedia = data.common_sense_media||false;
@@ -140,7 +171,7 @@ $(document).ready(function() {
 
           //variable to populate the Main section of the movieOverview section
           var descHead =  
-            "<div id='descHead' class='col s12'>" + 
+            "<div id='descHead"+data.id+"' class='col s12'>" + 
               "<h1 class='movie-title'>" + data.title + "</h1>" +
               "<h3 class='mpaa-rating'> Rated: " + rated +
               "<a class='commonsense' target='_blank' title='Common Sense Media' href=" 
@@ -151,45 +182,45 @@ $(document).ready(function() {
 
             
           //variable to populate the Links section of the movieOverview section
-          var descLinks = 
-            "<div id='descLinks' class='movieLinks col s12'>";
-          if(trailerVideo){
-          descLinks +=
-              "<a href=" + trailerVideo + "rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe' id='trailerLink'>" +
-              "<img class='movieLinkIcon' src='assets/images/play_trailer.png' height='100' width='100'></a>";
-          };
-          if(imdbLink) {
-          descLinks +=   
-              "<a target='_blank' title='IMDB' href=" + imdbLink + 
-                "><img class='movieLinkIcon' src='assets/images/imdb.png' height='100' width='100'></a>";
-          };
-          if(rottenTomatoes) {
-          descLinks +=
-              "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes +
-                  "><img class='movieLinkIcon' src='assets/images/rotten.png' height='100' width='100'></a>";
-          }; 
-          if(metaCritic) {
-          descLinks +=  "<a target='_blank'  title='Metacritic'  href=" + metaCritic +
-                "><img class='movieLinkIcon' src='assets/images/Metacritic.png' height='100' width='100'></a>";
-          };
-          if(facebook){
-          descLinks +=  "<a target='_blank' title='Facebook' href=" + facebook + 
-                  "><img class='movieLinkIcon' src='assets/images/facebook.png' height='100' width='100'></a>";
-          };
-          if(wikipedia){
-          descLinks +=
-                "<a target='_blank' title='Wikipedia' href=" + wikipedia + 
-                  "><img class='movieLinkIcon' src='assets/images/wikipedia.png' height='100' width='100'></a>";
-          };  
-            "</div>";
+          var descLinks =
+                "<div id='descLinks"+data.id+"' class='movieLinks col s12'>";
+              if(trailerVideo){
+              descLinks +=
+                  "<a href=" + trailerVideo + "rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe' id='trailerLink'>" +
+                  "<img class='movieLinkIcon' src='assets/images/play_trailer.png' height='100' width='100'></a>";
+              };
+              if(imdbLink) {
+              descLinks +=   
+                  "<a target='_blank' title='IMDB' href=" + imdbLink + 
+                    "><img class='movieLinkIcon' src='assets/images/imdb.png' height='100' width='100'></a>";
+              };
+              if(rottenTomatoes) {
+              descLinks +=
+                  "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes +
+                      "><img class='movieLinkIcon' src='assets/images/rotten.png' height='100' width='100'></a>";
+              }; 
+              if(metaCritic) {
+              descLinks +=  "<a target='_blank'  title='Metacritic'  href=" + metaCritic +
+                    "><img class='movieLinkIcon' src='assets/images/Metacritic.png' height='100' width='100'></a>";
+              };
+              if(facebook){
+              descLinks +=  "<a target='_blank' title='Facebook' href=" + facebook + 
+                      "><img class='movieLinkIcon' src='assets/images/facebook.png' height='100' width='100'></a>";
+              };
+              if(wikipedia){
+              descLinks +=
+                    "<a target='_blank' title='Wikipedia' href=" + wikipedia + 
+                      "><img class='movieLinkIcon' src='assets/images/wikipedia.png' height='100' width='100'></a>";
+              };
+                + "</div>";
 
           //variable to populate the Cast section of the movieOverview section
           var descCast = 
-            "<div id='descCast' class='col s12'><h1 class='watch'> Cast </h1><div class='castResults'></div></div>";  
+            "<div class='castDiv' id='descCast"+data.id+"' class='col s12'><h1 class='watch'> Cast </h1><div class='castResults'></div></div>";  
 
           //variable to populate the Watch section of the movieOverview section
           var descViews = 
-            "<div id='descViews' class='col s12'>" + 
+            "<div class='viewsDiv' id='descViews"+data.id+"' class='col s12'>" + 
               "<h1 class='watch'> Rent or Buy </h1><div class='buyResults'></div>" + "<br>" +
               "<h1 class='watch'> Subscription Services </h1><div class='streamResults'></div>" + 
             "</div>";
@@ -197,16 +228,16 @@ $(document).ready(function() {
           //variable to build out the sectriopns of the movieOverview div using Materialize Tabs
           var description = 
             "<div class='movieOverview z-depth-5 hidden row'>" + "<div class='col s12'>" + "<ul class='tabs'>" + 
-              "<li class='tab col s3'><a href='#descHead'>Main</a></li>" +
-              "<li class='tab col s3'><a href='#descViews'>Watch</a></li>" +
-              "<li class='tab col s3'><a href='#descCast'>Cast</a></li>" +
-              "<li class='tab col s3'><a href='#descLinks'>Links</a></li>" + "</ul>" + "</div>" +
-                  descHead + descViews + descCast + descLinks +
+              "<li class='tab col s3'><a href='#descHead"+data.id+"'>Main</a></li>" +
+              "<li class='tab col s3'><a href='#descViews"+data.id+"'>Watch</a></li>" +
+              "<li class='tab col s3'><a href='#descCast"+data.id+"'>Cast</a></li>" +
+              "<li class='tab col s3'><a href='#descLinks"+data.id+"'>Links</a></li>" + "</ul>" + "</div>" +
+                  descHead + descViews + descCast + "<div class='LinksDiv'>" + descLinks + "</div>" +
             "</div>";
           //have the variable movieResult build out the whole movieContainer div
           movieResult = 
-            "<div class='movieContainer valign-wrapper'><img data-ref="+data.id
-              +" class='movieResult z-depth-5' src=" + image + ">" + description + "</div>";
+            "<div class='movieContainer valign-wrapper'><img data-ref='"+data.id
+              +"' class='movieResult z-depth-5' src=" + image + ">" + description + "</div>";
           
           $('.guidebox-search-results').append(movieResult);    //append the the movieResult in the results area of the DOM
           $('.guidebox-search-results').find('ul.tabs').tabs(); //used to initialize Materialize tabns since they are added dynamically
