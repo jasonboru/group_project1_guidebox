@@ -1,10 +1,10 @@
 $(document).ready(function() {
   var omdbEndpoint = "https://www.omdbapi.com/?i=";
   var guideboxApiKey = 'bb5916942e7197cb1bbd1ba21afebb7bb1b57a51'; //back up key 5de31aceff0f33007097cdd38a781d9ce2c97579
-  var guideboxEndpoint = 'http://api-public.guidebox.com/v2/us/' + guideboxApiKey + '/search/movie/title/';  
+  var guideboxEndpoint = 'https://api-public.guidebox.com/v2/us/' + guideboxApiKey + '/search/movie/title/';  
 
   //An Api call for our current Keys quota
-  var quota = $.getJSON('http://api-public.guidebox.com/v2/us/' + guideboxApiKey + '/quota', function(data){
+  var quota = $.getJSON('https://api-public.guidebox.com/v2/us/' + guideboxApiKey + '/quota', function(data){
     console.log(data);  //this helps us keep track of our Search limit. Each Key has 15K per month.
   });
 
