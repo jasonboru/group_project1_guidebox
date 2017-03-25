@@ -87,7 +87,7 @@ $(document).ready(function() {
 
   //function to find the movies based on a cast members id #
   function castingCall(personID, callback) {
-    var castQuery = 'http://api-public.guidebox.com/v2/person/' + personID + '/credits?api_key=' 
+    var castQuery = 'https://api-public.guidebox.com/v2/person/' + personID + '/credits?api_key=' 
       + guideboxApiKey + '&role=cast';          //personID will be the cast members id # passed in from their data attr
     console.log("castQuery is " + castQuery)
       $.getJSON(castQuery, callback);
