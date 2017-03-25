@@ -41,21 +41,13 @@ $(document).ready(function() {
   };  
 
 
-
+  // function to do an Ajax call to the New York Times to get the link for their movie review
   function nytReviewCall(movie, callback){
-    nytMovie = "'" + movie.replace(/\s/g, "+") + "'";
-    console.log("nyt movie var = " + movie);
-    var nytUrl = nytMovieEndpoint + nytMovieKey + "&query=" + nytMovie;
-    $.getJSON(nytUrl, callback)
+    nytMovie = "'" + movie.replace(/\s/g, "+") + "'";                   //NYT dont like spaces...get em outta errr
+    //console.log("nyt movie var = " + movie);                          
+    var nytUrl = nytMovieEndpoint + nytMovieKey + "&query=" + nytMovie; //building the NYT url for call
+    $.getJSON(nytUrl, callback)                                         //Ajax call using their url and a callback that will be used to 4call postReview(later) 
   };
-
-  /*function postReview(nyt){
-    var reviewUrl = nyt.results[0].link.url
-    console.log("NYT article " + reviewUrl)
-    $("#nytReviewLink").append("<a target='_blank' title='NYT' href=" + reviewUrl + 
-                "><img class='movieLinkIcon' src='assets/images/nyt.png'></a>");
-  }*/
-
 
   //function to run the API call for movies matching the search term give
   function searchGuideboxAPI(searchTerm, callback) {
@@ -137,6 +129,7 @@ $(document).ready(function() {
           var movieResult = '';                     //set movieResult as a string
           var rated = data.rating;                  //set rated as the movies rating
           var genre = data.genres[0].title;         //set genre primary index in data.genre
+          var releaseYear =data.release_year;
           var movieDescription = data.overview;     //set movieDescription as the data in overview
           var imdbLink = imdbEndpoint + data.imdb;  //imdbLink becomes the url for that movies imdb page
 
@@ -147,24 +140,23 @@ $(document).ready(function() {
 
           //getDataFromOMDB(data.imdb);             //a call for OMDB data once we figure what we want to pull
 
-
-          /*function postReview(nyt){
+          //function that posts the icon that links to their article
+          function postReview(nyt){
             var reviewUrl = nyt.results[0].link.url||false;
-            console.log("NYT article " + reviewUrl)
-
-            $("#nytReviewLink").append("<a target='_blank' title='NYT' href='" + reviewUrl + 
+            console.log("NYT article " + reviewUrl);
+            $("#descLinks"+data.id).append("<a target='_blank' title='NYT' href='" + reviewUrl + 
                         "'><img class='movieLinkIcon' src='assets/images/nyt.png' height='100' width='100'></a>");
           }
 
-          nytReviewCall(data.title, postReview); */
+          nytReviewCall(data.title, postReview);
 
 
 
-          //build out variables for the various links
+          //build out variables for the various links...if they cant return the take on the value false...useful
           var rottenTomatoes = rottenTomEndpoint + data.rottentomatoes||false;
           var commonSenseMedia = data.common_sense_media||false;
           var metaCritic = data.metacritic||false;
-          console.log(metaCritic);
+          //console.log(metaCritic);
           var trailerVideo = data.trailers.web[0].embed||false;
           var facebook = facebookEndpoint + data.social.facebook.facebook_id||false;
           var wikipedia = wikipediaEndpoint + data.wikipedia_id||false;
@@ -172,7 +164,7 @@ $(document).ready(function() {
           //variable to populate the Main section of the movieOverview section
           var descHead =  
             "<div id='descHead"+data.id+"' class='col s12'>" + 
-              "<h1 class='movie-title'>" + data.title + "</h1>" +
+              "<h1 class='movie-title'>" + data.title + "</h1>" + "<span class='yearOut teal-text'>" + releaseYear + "</span>" +
               "<h3 class='mpaa-rating'> Rated: " + rated +
               "<a class='commonsense' target='_blank' title='Common Sense Media' href=" 
                  + commonSenseMedia + " ><img src='assets/images/commonsense.png' height='40' width='40'></a></h3>" + "<br>" +
@@ -184,41 +176,41 @@ $(document).ready(function() {
           //variable to populate the Links section of the movieOverview section
           var descLinks =
                 "<div id='descLinks"+data.id+"' class='movieLinks col s12'>";
-              if(trailerVideo){
+              if(trailerVideo){ //if true create the variable of strinngs
               descLinks +=
                   "<a href=" + trailerVideo + "rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe' id='trailerLink'>" +
                   "<img class='movieLinkIcon' src='assets/images/play_trailer.png' height='100' width='100'></a>";
               };
-              if(imdbLink) {
+              if(imdbLink) { // if true add to the variable of strinngs
               descLinks +=   
                   "<a target='_blank' title='IMDB' href=" + imdbLink + 
                     "><img class='movieLinkIcon' src='assets/images/imdb.png' height='100' width='100'></a>";
               };
-              if(rottenTomatoes) {
+              if(rottenTomatoes) { // if true add to the variable of strinngs
               descLinks +=
                   "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes +
                       "><img class='movieLinkIcon' src='assets/images/rotten.png' height='100' width='100'></a>";
               }; 
-              if(metaCritic) {
+              if(metaCritic) { // if true add to the variable of strinngs
               descLinks +=  "<a target='_blank'  title='Metacritic'  href=" + metaCritic +
                     "><img class='movieLinkIcon' src='assets/images/Metacritic.png' height='100' width='100'></a>";
               };
-              if(facebook){
+              if(facebook){ // if true add to the variable of strinngs
               descLinks +=  "<a target='_blank' title='Facebook' href=" + facebook + 
                       "><img class='movieLinkIcon' src='assets/images/facebook.png' height='100' width='100'></a>";
               };
-              if(wikipedia){
+              if(wikipedia){ // if true add to the variable of strinngs
               descLinks +=
                     "<a target='_blank' title='Wikipedia' href=" + wikipedia + 
                       "><img class='movieLinkIcon' src='assets/images/wikipedia.png' height='100' width='100'></a>";
               };
-                + "</div>";
+                + "</div>";  //this isnt the way to close i think. When looking at the inspector thi closing tag was missing.
 
           //variable to populate the Cast section of the movieOverview section
           var descCast = 
             "<div class='castDiv' id='descCast"+data.id+"' class='col s12'><h1 class='watch'> Cast </h1><div class='castResults'></div></div>";  
 
-          //variable to populate the Watch section of the movieOverview section
+          //variable to populate the Stream section of the movieOverview section
           var descViews = 
             "<div class='viewsDiv' id='descViews"+data.id+"' class='col s12'>" + 
               "<h1 class='watch'> Rent or Buy </h1><div class='buyResults'></div>" + "<br>" +
@@ -229,7 +221,7 @@ $(document).ready(function() {
           var description = 
             "<div class='movieOverview z-depth-5 hidden row'>" + "<div class='col s12'>" + "<ul class='tabs'>" + 
               "<li class='tab col s3'><a href='#descHead"+data.id+"'>Main</a></li>" +
-              "<li class='tab col s3'><a href='#descViews"+data.id+"'>Watch</a></li>" +
+              "<li class='tab col s3'><a href='#descViews"+data.id+"'>Stream</a></li>" +
               "<li class='tab col s3'><a href='#descCast"+data.id+"'>Cast</a></li>" +
               "<li class='tab col s3'><a href='#descLinks"+data.id+"'>Links</a></li>" + "</ul>" + "</div>" +
                   descHead + descViews + descCast + "<div class='LinksDiv'>" + descLinks + "</div>" +
@@ -259,7 +251,7 @@ $(document).ready(function() {
       var query = $(this).find('.guidebox-query').val();    //grab the users search term
       searchGuideboxAPI(query, displaySearchData);          //call the function to search movies passing in the users term then running displaySearchData
     });
-  }  
+  } 
 
   //This block Im working on to try and prevent a user double clicking submit and gettting multiple sets of results
   /*$('.btnSubmit').click(function(event) {
@@ -287,7 +279,10 @@ $(document).ready(function() {
       rules: {
         titleTerm: {
           required: true
-        } 
+        }, 
+        btnTop25: {
+          required: false
+        }
       },
       messages: {
         required: 'please enter a search term'

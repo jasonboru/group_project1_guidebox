@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
+<head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Streamius</title>
-
     <!-- Compiled and minified CSS from Materialize -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
     <!-- featherlight -->
     <link href="assets/featherlight-1.5.1/release/featherlight.min.css" type="text/css" rel="stylesheet" />
     <!-- fancybox -->
@@ -21,45 +19,37 @@
     <script src="https://use.fontawesome.com/fa1817fa3f.js"></script>
     <!-- Firebase Reference -->
     <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
+</head>
 
-  </head>
-
-  <body>
-
+<body>
     <div>
-
-      <!-- search icon (functioning as "home" button) -->
-      <div id="searchIcon" class="searchCall" ><i class="fa fa-search fa-2x" aria-hidden='true'></i></div>
-      <!-- logo -->
-      <img class="responsive-img landing" id="logo" src="assets/images/logo_w_glasses.png">
-      <img class="responsive-img searchCall" id="logoSmall" src="assets/images/logo_small.png">
-      <!-- content -->
-      <h4 class="title landing">Enter a movie to find out where to stream it,<br>rent it, or buy it!</h4>
-      <div class="row">
-        <div class="formDiv col s8 offset-s2 m4 offset-m4">
-          <form id="form" class="guidebox-search-form landing">
-            <div class="input-field">
-              <label for="query"></label>
-              <input type="text" class="guidebox-query" placeholder="Enter a movie here" name="titleTerm">
-              <div class=".errorTxt"></div>
+        <!-- search icon (functioning as "home" button) -->
+        <div id="searchIcon" class="searchCall"><i class="fa fa-search fa-2x" aria-hidden='true'></i></div>
+        <!-- logo -->
+        <img class="responsive-img landing" id="logo" src="assets/images/logo_w_glasses.png" alt="Streamius Logo">
+        <img class="responsive-img searchCall" id="logoSmall" src="assets/images/logo_small.png" alt="Streamius Logo small">
+        <!-- content -->
+        <h4 class="landing catchline">Enter a movie to find out where to stream it,<br>rent it, or buy it!</h4>
+        <div class="row">
+            <div class="formDiv col s8 offset-s2 m4 offset-m4">
+                <form id="form" class="guidebox-search-form landing">
+                    <div class="input-field">
+                        <input type="text" class="guidebox-query" placeholder="Enter a movie here" name="titleTerm">
+                        <div class=".errorTxt"></div>
+                    </div>
+                    <button id="btnSubmit" class="btn waves-effect waves-light submit" type="submit" name="action" onclick="return">Search</button>
+                </form>
             </div>
-              <button id="btnSubmit" class="btn waves-effect waves-light submit" type="submit" name="action" onclick="return">Action</button>
-              <!--<button type="submit" name="submit" class="submit" onclick="return">Search</button>-->
-          </form>
-        </div>  
-      </div>
-      <!-- div to dump search results -->
-
-      <div class="guidebox-search-results"></div>
-
+        </div>
+        <!-- div to dump search results -->
+        <div class="guidebox-search-results"></div>
     </div>
-
     <!-- js links -->
     <script src="https://code.jquery.com/jquery-3.1.1.js"></script>
     <script src="assets/featherlight-1.5.1/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.1/js/materialize.min.js"></script>
     <script src="assets/js/logic.js"></script>
-    
-  </body>
+</body>
+
 </html>

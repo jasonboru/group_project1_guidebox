@@ -9,12 +9,13 @@ body {
 }
 
 h1 {
-      font-size: 2.5em;
-      color: #d46e61;
+    font-size: 3em;
+    font-weight: 900;
+    color: #d46e61;
 }
 
 h3 {
-      font-size: 1.5em;
+    font-size: 1.5em;
 }
 
 h5 {
@@ -26,10 +27,6 @@ h5 {
 }
 .title {
   color: #fff;
-}
-
-.smallLogo {
-  display: hidden;
 }
 
 #searchIcon {
@@ -89,7 +86,7 @@ h5 {
 .movieOverview {
   color: #000;
   position: absolute;
-  left: 519px;
+  left: 35em;
   height: 362px;
   width: 60%;
   margin-bottom: 60px;
@@ -97,7 +94,6 @@ h5 {
   background-color: #fff;
   background-size: cover;
   overflow: hidden;
-
   overflow-y: auto;
 }
 
