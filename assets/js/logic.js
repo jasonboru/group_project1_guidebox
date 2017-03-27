@@ -121,6 +121,7 @@ $(document).ready(function() {
     $("#logoSmall").fadeIn("slow");       //fade in the small logo
     data.results.forEach(function(item) { //do the following for each movie result returned
       var image = item.poster_240x342;    //var image is the poster for each result
+      image = image.replace(/^http:\/\//i, 'https://');
       if (image !== apisDefaultImg) {     //if image is not default then proceed (ignore results with no poster)
         //building a new url to use for Ajax call for more details on the movie
         var trailerLinksURL = 'https://api-public.guidebox.com/v2/US/' + guideboxApiKey + '/movie/' + item.id;
@@ -145,7 +146,7 @@ $(document).ready(function() {
             var reviewUrl = nyt.results[0].link.url||false;
             console.log("NYT article " + reviewUrl);
             $("#descLinks"+data.id).append("<a target='_blank' title='NYT' href='" + reviewUrl + 
-                        "'><img class='movieLinkIcon' src='assets/images/nyt.png' height='100' width='100'></a>");
+                        "'><img class='movieLinkIcon' src='assets/images/nyt.png' height='80' width='80'></a>");
           }
 
           nytReviewCall(data.title, postReview);
@@ -179,30 +180,30 @@ $(document).ready(function() {
               if(trailerVideo){ //if true create the variable of strinngs
               descLinks +=
                   "<a href=" + trailerVideo + "rel='trailervideo' autoplay title='Trailer' data-featherlight='iframe' id='trailerLink'>" +
-                  "<img class='movieLinkIcon' src='assets/images/play_trailer.png' height='100' width='100'></a>";
+                  "<img class='movieLinkIcon' src='assets/images/play_trailer.png' height='80' width='80'></a>";
               };
               if(imdbLink) { // if true add to the variable of strinngs
               descLinks +=   
                   "<a target='_blank' title='IMDB' href=" + imdbLink + 
-                    "><img class='movieLinkIcon' src='assets/images/imdb.png' height='100' width='100'></a>";
+                    "><img class='movieLinkIcon' src='assets/images/imdb.png' height='80' width='80'></a>";
               };
               if(rottenTomatoes) { // if true add to the variable of strinngs
               descLinks +=
                   "<a target='_blank' title='Rotten Tomatoes' href=" + rottenTomatoes +
-                      "><img class='movieLinkIcon' src='assets/images/rotten.png' height='100' width='100'></a>";
+                      "><img class='movieLinkIcon' src='assets/images/rotten.png' height='80' width='80'></a>";
               }; 
               if(metaCritic) { // if true add to the variable of strinngs
               descLinks +=  "<a target='_blank'  title='Metacritic'  href=" + metaCritic +
-                    "><img class='movieLinkIcon' src='assets/images/Metacritic.png' height='100' width='100'></a>";
+                    "><img class='movieLinkIcon' src='assets/images/Metacritic.png' height='80' width='80'></a>";
               };
               if(facebook){ // if true add to the variable of strinngs
               descLinks +=  "<a target='_blank' title='Facebook' href=" + facebook + 
-                      "><img class='movieLinkIcon' src='assets/images/facebook.png' height='100' width='100'></a>";
+                      "><img class='movieLinkIcon' src='assets/images/facebook.png' height='80' width='80'></a>";
               };
               if(wikipedia){ // if true add to the variable of strinngs
               descLinks +=
                     "<a target='_blank' title='Wikipedia' href=" + wikipedia + 
-                      "><img class='movieLinkIcon' src='assets/images/wikipedia.png' height='100' width='100'></a>";
+                      "><img class='movieLinkIcon' src='assets/images/wikipedia.png' height='80' width='80'></a>";
               };
                 + "</div>";  //this isnt the way to close i think. When looking at the inspector thi closing tag was missing.
 

@@ -80,13 +80,13 @@ h5 {
 .activeCard {
   position: absolute;
   left: 300;
-  margin-left: 115px;
+  /*margin-left: 115px; taking out for presentation diplay on */
 }
 
 .movieOverview {
   color: #000;
   position: absolute;
-  left: 35em;
+  left: 28em; /* change back to 35 for most screens*/
   height: 362px;
   width: 60%;
   margin-bottom: 60px;
@@ -178,6 +178,10 @@ span.featherlight-close-icon.featherlight-close {
   width: auto;
 }
 
+.containResults {
+  margin: 0 auto;
+}
+
 @media only screen and (max-width: 768px) {
   .movieResult {
     position: static;
@@ -186,7 +190,7 @@ span.featherlight-close-icon.featherlight-close {
     position: static;
     margin: 0 auto;
     width: 100%;
-    height: 100%;
+    height: 450px;
     margin-bottom: 30px;
     padding: 0px 5px 5px 5px;
   }
@@ -199,8 +203,12 @@ span.featherlight-close-icon.featherlight-close {
     font-size: 12px;   
   }
 
-  .LinksDiv, .castDiv, .viewsDiv {
-  margin-top: 30px;
+  .castDiv, .viewsDiv {
+  margin-top: 80px;
+  }
+
+  .LinksDiv {
+    margin-top: 130px;
   }
 }
 
@@ -208,10 +216,10 @@ span.featherlight-close-icon.featherlight-close {
   // LANDSCAPE:
   //Windows Surface Pro
   .activeCard {
-    margin-left: 25px;
+    margin-left: 0px;
   }
 
   .movieOverview {
     left: 419px;
   }
-} */
+}*/
