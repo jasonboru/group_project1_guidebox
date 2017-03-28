@@ -72,7 +72,7 @@ $(document).ready(function() {
           +"><button class='streamLink btn waves-effect waves-light'>"+streamData[i].display_name+"</button></a>");
       }
     } else {                                  //if there are no results in subscriptions then it runs the code below
-        $(".streamResults").append("<p>none avaialable</p>");  //append 'none available' to the Subscription results div
+        $(".streamResults").append("<p>None available</p>");  //append 'none available' to the Subscription results div
     }
   }
 
@@ -109,7 +109,7 @@ $(document).ready(function() {
           +"><button class='streamLink btn waves-effect waves-light'>"+purchase[i].display_name+"</button></a>");
       }
     } else {                          //if there are no results in purchase.length append 'no results'
-        $(".buyResults").append("<p>none avaialable</p>");
+        $(".buyResults").append("<p>None available</p>");
     }
   }
 
